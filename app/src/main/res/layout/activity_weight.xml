@@ -24,17 +24,16 @@
         android:text="What is your weight?" />
 
     <EditText
-        android:id="@+id/editText"
+        android:id="@+id/et_weight"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="249dp"
         android:ems="10"
-        android:inputType="textPersonName"
+        android:inputType="numberDecimal"
         android:elevation="4dp"
-        android:background="@drawable/rectangle_edit_text"
-        android:text="Name" />
+        android:background="@drawable/rectangle_edit_text" />
 
     <Button
         android:id="@+id/btn_next_to_gender"
