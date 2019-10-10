@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MenuUtama">
+
+    <android.support.design.widget.BottomNavigationView
+        android:id="@+id/main_nav"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        app:menu="@menu/nav_items" />
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentStart="true"
+        android:layout_above="@+id/main_nav"
+        android:id="@+id/main_frame"
+        android:layout_alignParentTop="true"></FrameLayout>
+
+</RelativeLayout>
+
+<!--<FrameLayout-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="match_parent"-->
+    <!--android:layout_alignParentStart="true"-->
+    <!--android:layout_above="@+id/main_nav"-->
+    <!--android:id="@+id/main_frame"-->
+    <!--android:layout_alignParentTop="true">-->
+    <!--<ImageView-->
+        <!--android:id="@+id/iv_header_menu_utama"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="204dp"-->
+        <!--app:srcCompat="@drawable/bg_header_menu" />-->
+
+    <!--<RelativeLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:id="@+id/rl_header">-->
+        <!--<ImageView-->
+            <!--android:id="@+id/iv_base_menu_utama"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="200dp"-->
+            <!--android:layout_marginTop="105dp"-->
+            <!--app:srcCompat="@drawable/base_menu_header" />-->
+
+        <!--<TextView-->
+            <!--android:id="@+id/tv_nama_customer"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginStart="66dp"-->
+            <!--android:layout_marginTop="137dp"-->
+            <!--android:textSize="48px"-->
+            <!--android:text="Ms.Dewi Lie" />-->
+        <!--<TextView-->
+            <!--android:id="@+id/tv_tanggal_sekarang"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_alignParentTop="true"-->
+            <!--android:layout_alignStart="@+id/tv_nama_customer"-->
+            <!--android:layout_marginTop="170dp"-->
+            <!--android:text="29 Agustus 2019" />-->
+
+        <!--<ImageView-->
+            <!--android:id="@+id/iv_logo_burning"-->
+            <!--android:layout_width="45dp"-->
+            <!--android:layout_height="45dp"-->
+            <!--android:layout_alignParentTop="true"-->
+            <!--android:layout_alignStart="@+id/tv_nama_customer"-->
+            <!--android:layout_marginTop="213dp"-->
+            <!--app:srcCompat="@drawable/calories_icon" />-->
+
+        <!--<TextView-->
+            <!--android:id="@+id/tv_tulisan_calories_aja"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_alignParentStart="true"-->
+            <!--android:layout_alignTop="@+id/iv_logo_burning"-->
+            <!--android:layout_marginStart="119dp"-->
+            <!--android:textSize="20dp"-->
+            <!--android:textStyle="bold"-->
+            <!--android:text="Calories" />-->
+
+        <!--<TextView-->
+            <!--android:id="@+id/tv_jumlah_calories"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_alignBottom="@+id/iv_logo_burning"-->
+            <!--android:layout_alignStart="@+id/tv_tulisan_calories_aja"-->
+            <!--android:text="0/1200" />-->
+    <!--</RelativeLayout>-->
+
+    <!--<android.support.v7.widget.RecyclerView-->
+        <!--android:id="@+id/rv_add_food"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="247dp"-->
+        <!--android:layout_marginTop="170dp"-->
+        <!--android:layout_below="@+id/iv_base_menu_utama"-->
+        <!--android:layout_gravity="center"-->
+        <!--&gt;-->
+    <!--</android.support.v7.widget.RecyclerView>-->
+
+<!--</FrameLayout>-->

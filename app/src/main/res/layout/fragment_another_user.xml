@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".AnotherUser">
+
+    <!-- TODO: Update blank fragment layout -->
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/fragment_profile">
+        <ImageView
+            android:id="@+id/iv_bg_header_profile"
+            android:layout_width="match_parent"
+            android:layout_height="251dp"
+            android:layout_marginStart="0dp"
+            android:src="@drawable/bg_header_profile" />
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/rl_header">
+            <ImageView
+                android:id="@+id/iv_base_menu_utama"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:layout_marginTop="140dp"
+                app:srcCompat="@drawable/base_menu_header" />
+
+            <ImageView
+                android:id="@+id/iv_dp_profile"
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginTop="164dp"
+                android:src="@drawable/dp_profile" />
+
+            <TextView
+                android:id="@+id/tv_nama_customer"
+                android:layout_below="@+id/iv_dp_profile"
+                android:paddingTop="10dp"
+                android:gravity="center"
+                android:textSize="52px"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Ms.Dewi Lie"/>
+            <TextView
+                android:id="@+id/tv_edit_profile"
+                android:layout_below="@+id/tv_nama_customer"
+                android:gravity="center"
+                android:textSize="36px"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Edit"/>
+
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_alignParentBottom="true"
+                android:layout_below="@+id/iv_base_menu_utama"
+                android:layout_centerHorizontal="true"
+                android:layout_marginBottom="0dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <Button
+                        android:id="@+id/btn_acv"
+                        android:layout_width="280dp"
+                        android:layout_height="68dp"
+                        android:layout_gravity="center"
+                        android:background="@drawable/button_acv" />
+                    <Button
+                        android:id="@+id/btn_notif"
+                        android:layout_width="280dp"
+                        android:layout_height="68dp"
+                        android:layout_gravity="center"
+                        android:background="@drawable/button_notif"/>
+                    <Button
+                        android:id="@+id/btn_setting"
+                        android:layout_width="280dp"
+                        android:layout_height="68dp"
+                        android:layout_gravity="center"
+                        android:background="@drawable/button_setting"/>
+                    <Button
+                        android:id="@+id/btn_help"
+                        android:layout_width="280dp"
+                        android:layout_height="68dp"
+                        android:layout_gravity="center"
+                        android:background="@drawable/button_help"/>
+                    <Button
+                        android:id="@+id/btn_credit"
+                        android:layout_width="280dp"
+                        android:layout_height="68dp"
+                        android:layout_gravity="center"
+                        android:background="@drawable/button_credit"/>
+
+                </LinearLayout>
+
+            </ScrollView>
+
+
+        </RelativeLayout>
+
+    </FrameLayout>
+
+</FrameLayout>
