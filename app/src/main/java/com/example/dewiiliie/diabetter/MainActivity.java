@@ -23,7 +23,7 @@ public class MainActivity extends AppCompatActivity {
     private Button button;
     private TextView tv_register;
     private ApiInterface mApiInterface;
-
+    // TODO : install retrofit
     @Override // Root
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
