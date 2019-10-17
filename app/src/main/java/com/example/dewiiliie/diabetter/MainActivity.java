@@ -24,6 +24,8 @@ public class MainActivity extends AppCompatActivity {
     private TextView tv_register;
     private ApiInterface mApiInterface;
     // TODO : install retrofit
+    // Install retrofit will be done on partner's computer
+    // Already added permission to use internet on this project
     @Override // Root
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
