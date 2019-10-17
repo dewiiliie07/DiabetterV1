@@ -13,7 +13,7 @@ public class MainActivity extends AppCompatActivity {
     private Button button;
     private TextView tv_register;
 
-    @Override
+    @Override // Root
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
