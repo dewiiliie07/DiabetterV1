@@ -42,11 +42,11 @@ public class Gender extends AppCompatActivity {
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        btnNext = (Button) findViewById(R.id.btn_next_to_aktifitas);
+        btnNext = (Button) findViewById(R.id.btn_next_to_birthdate);
         btnNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(Gender.this,JenisAktivitas.class);
+                Intent intent = new Intent(Gender.this,Birthdate.class);
 
                 intent.putExtra("FULLNAME", full_name);
                 intent.putExtra("EMAIL", email);

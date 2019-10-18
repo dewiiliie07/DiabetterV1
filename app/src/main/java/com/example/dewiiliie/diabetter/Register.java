@@ -27,7 +27,7 @@ public class Register extends AppCompatActivity {
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        btn_next = (Button) findViewById(R.id.btn_next_to_birthdate);
+        btn_next = (Button) findViewById(R.id.btn_next_to_gender);
         btn_next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -35,7 +35,7 @@ public class Register extends AppCompatActivity {
                 String email = et_email.getText().toString();
                 String password = et_password.getText().toString();
 
-                Intent intent = new Intent(Register.this,Birthdate.class);
+                Intent intent = new Intent(Register.this,Gender.class);
                 intent.putExtra("FULLNAME", full_name);
                 intent.putExtra("EMAIL", email);
                 intent.putExtra("PASSWORD", password);

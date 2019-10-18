@@ -43,13 +43,13 @@ public class Weight extends AppCompatActivity {
 
         final EditText et_weight = (EditText) findViewById(R.id.et_weight);
 
-        btnNext = (Button) findViewById(R.id.btn_next_to_gender);
+        btnNext = (Button) findViewById(R.id.btn_next_to_jenis_aktivitas);
         btnNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
                 float weight = Float.parseFloat(et_weight.getText().toString());
-                Intent intent = new Intent(Weight.this,Gender.class);
+                Intent intent = new Intent(Weight.this,JenisAktivitas.class);
 
                 intent.putExtra("FULLNAME", full_name);
                 intent.putExtra("EMAIL", email);
