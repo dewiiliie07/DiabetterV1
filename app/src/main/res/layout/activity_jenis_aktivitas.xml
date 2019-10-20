@@ -21,48 +21,56 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="118dp"
         android:fontFamily="@font/montserrat_bold"
-        android:text="Input Your Activity"
+        android:text="Choose Your Activity"
         android:textSize="22dp" />
 
-    <EditText
-        android:id="@+id/et_name"
-        android:layout_width="270dp"
-        android:layout_height="47dp"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="217dp"
-        android:background="@drawable/rectangle_edit_text"
-        android:elevation="4dp"
-        android:ems="10"
-        android:hint="Input your name here"
-        android:inputType="textPersonName"/>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center">
+        <Button
+            android:id="@+id/btn_istirahat"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Istirahat"
+            >
+        </Button>
+        <Button
+            android:id="@+id/btn_ringan"
+            android:layout_below="@id/btn_istirahat"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Ringan"
+            >
+        </Button>
+        <Button
+            android:id="@+id/btn_sedang"
+            android:layout_below="@id/btn_ringan"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Sedang"
+            >
+        </Button>
+        <Button
+            android:id="@+id/btn_berat"
+            android:layout_below="@id/btn_sedang"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Berat"
+            >
+        </Button>
+        <Button
+            android:id="@+id/btn_sangat_berat"
+            android:layout_below="@id/btn_berat"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Sangat Berat"
+            >
+        </Button>
 
 
-    <EditText
-        android:id="@+id/editText2"
-        android:layout_width="270dp"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="252dp"
-        android:background="@drawable/rectangle_edit_text"
-        android:elevation="6dp"
-        android:ems="10"
-        android:hint="Input your email here"
-        android:inputType="textPersonName" />
 
-    <EditText
-        android:id="@+id/editText3"
-        android:layout_width="270dp"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="176dp"
-        android:background="@drawable/rectangle_edit_text"
-        android:elevation="6dp"
-        android:ems="10"
-        android:inputType="textPassword"
-        android:text="password" />
+    </RelativeLayout>
 
     <Button
         android:id="@+id/btn_next_to_term"

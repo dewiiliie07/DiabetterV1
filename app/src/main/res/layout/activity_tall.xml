@@ -24,29 +24,35 @@
         android:fontFamily="@font/montserrat_bold"
         android:text="How Tall Are You" />
 
-    <EditText
-        android:id="@+id/et_height"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="249dp"
-        android:ems="10"
-        android:inputType="numberDecimal"
-        android:elevation="4dp"
-        android:background="@drawable/rectangle_edit_text"
-        android:text="" />
+    <RelativeLayout
+        android:gravity="center_vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <EditText
+            android:id="@+id/et_height"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:ems="10"
+            android:gravity="center"
+            android:inputType="numberDecimal"
+            android:background="@drawable/base_list_food"
+            android:hint="Input Your Tall in Centimeter"/>
+    </RelativeLayout>
+
+
 
     <Button
         android:id="@+id/btn_next_to_weight"
         android:layout_width="270dp"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
         android:textColor="#ffffff"
         android:fontFamily="@font/montserrat_bold"
         android:textSize="15dp"
-        android:layout_marginBottom="159dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="57dp"
         android:background="@drawable/button_background"
         android:text="Next" />
 
