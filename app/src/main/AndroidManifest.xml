@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.example.dewiiliie.diabetter">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
@@ -12,6 +12,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar">
+        <activity android:name=".edit_qty_food"></activity>
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -34,7 +35,7 @@
         <activity android:name=".Weight" />
         <activity android:name=".Gender" />
         <activity android:name=".JenisAktivitas" />
-        <activity android:name=".TermCondition"></activity>
+        <activity android:name=".TermCondition" />
     </application>
 
 </manifest>

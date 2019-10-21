@@ -1,6 +1,7 @@
 package com.example.dewiiliie.diabetter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -40,7 +41,7 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.MyViewHolder> 
         holder.food_layout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(mContext, mFoodName.get(position), Toast.LENGTH_SHORT).show();
+//                Intent intent = new Intent(FoodAdapter.this,edit_qty_food.class);
             }
         });
     }

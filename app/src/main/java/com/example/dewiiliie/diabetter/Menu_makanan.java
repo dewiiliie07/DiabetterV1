@@ -52,20 +52,20 @@ public class Menu_makanan extends AppCompatActivity {
         mFoodNames.add("Ketan Putih");
         mCalories.add("217");
 
-        mFoodNames.add("Jagung Rebus");
-        mCalories.add("90,2");
+        mFoodNames.add("Ketupat");
+        mCalories.add("32");
 
-        mFoodNames.add("Jagung Rebus");
-        mCalories.add("90,2");
+        mFoodNames.add("Lontong");
+        mCalories.add("38");
 
-        mFoodNames.add("Jagung Rebus");
-        mCalories.add("90,2");
+        mFoodNames.add("Nasi Putih");
+        mCalories.add("175");
 
-        mFoodNames.add("Jagung Rebus");
-        mCalories.add("90,2");
+        mFoodNames.add("Bubur");
+        mCalories.add("44");
 
-        mFoodNames.add("Jagung Rebus");
-        mCalories.add("90,2");
+        mFoodNames.add("Makaroni");
+        mCalories.add("91");
 
         initRecycleView();
     }
