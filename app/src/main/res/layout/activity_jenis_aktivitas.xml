@@ -24,53 +24,66 @@
         android:text="Choose Your Activity"
         android:textSize="22dp" />
 
-    <RelativeLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center">
-        <Button
-            android:id="@+id/btn_istirahat"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Istirahat"
-            >
-        </Button>
-        <Button
-            android:id="@+id/btn_ringan"
-            android:layout_below="@id/btn_istirahat"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Ringan"
-            >
-        </Button>
-        <Button
-            android:id="@+id/btn_sedang"
-            android:layout_below="@id/btn_ringan"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Sedang"
-            >
-        </Button>
-        <Button
-            android:id="@+id/btn_berat"
-            android:layout_below="@id/btn_sedang"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Berat"
-            >
-        </Button>
-        <Button
-            android:id="@+id/btn_sangat_berat"
-            android:layout_below="@id/btn_berat"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Sangat Berat"
-            >
-        </Button>
+        android:layout_height="wrap_content"
+        android:layout_above="@id/btn_next_to_term"
+        android:layout_below="@id/textView">
+        <RelativeLayout
+            android:layout_marginTop="50dp"
+            android:layout_marginBottom="50dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center">
+            <Button
+                android:id="@+id/btn_istirahat"
+                android:layout_width="141dp"
+                android:layout_height="134dp"
+                android:layout_margin="10dp"
+                android:background="@drawable/istirahat"
+                >
+            </Button>
+            <Button
+                android:id="@+id/btn_ringan"
+                android:layout_below="@id/btn_istirahat"
+                android:layout_width="141dp"
+                android:layout_height="134dp"
+                android:layout_margin="10dp"
+                android:background="@drawable/ringan"
+                >
+            </Button>
+            <Button
+                android:id="@+id/btn_sedang"
+                android:layout_below="@id/btn_ringan"
+                android:layout_width="141dp"
+                android:layout_height="134dp"
+                android:layout_margin="10dp"
+                android:background="@drawable/sedang"
+                >
+            </Button>
+            <Button
+                android:id="@+id/btn_berat"
+                android:layout_below="@id/btn_sedang"
+                android:layout_width="141dp"
+                android:layout_height="134dp"
+                android:layout_margin="10dp"
+                android:background="@drawable/berat"
+                >
+            </Button>
+            <Button
+                android:id="@+id/btn_sangat_berat"
+                android:layout_below="@id/btn_berat"
+                android:layout_width="141dp"
+                android:layout_height="134dp"
+                android:layout_margin="10dp"
+                android:background="@drawable/sangat_berat"
+                >
+            </Button>
 
+        </RelativeLayout>
 
+    </ScrollView>
 
-    </RelativeLayout>
 
     <Button
         android:id="@+id/btn_next_to_term"
