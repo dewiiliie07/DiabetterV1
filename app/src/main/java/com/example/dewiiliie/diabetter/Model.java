@@ -3,12 +3,13 @@ package com.example.dewiiliie.diabetter;
 public class Model {
 
     private int image;
-    String title, addFood;
+    String title, addFood, editFood;
 
-    public Model(int image, String title, String addFood) {
+    public Model(int image, String title, String addFood, String editFood) {
         this.image = image;
         this.title = title;
         this.addFood = addFood;
+        this.editFood = editFood;
     }
 
     public int getImage() {
@@ -34,6 +35,12 @@ public class Model {
     public void setAddFood(String addFood) {
         this.addFood = addFood;
     }
+
+    public String getEditFood() {
+        return  editFood;
+    }
+
+    public  void setEditFood(String editFood){this.editFood = editFood; }
 
     //    private String text_view_breakfast;
 //    private int button_add;

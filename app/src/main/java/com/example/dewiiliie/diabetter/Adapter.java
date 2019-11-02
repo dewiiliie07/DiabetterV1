@@ -44,10 +44,11 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
 
         Model foodItem = mList.get(position);
         ImageView image = holder.iv_base;
-        TextView title, addFood;
+        TextView title, addFood, editFood;
 
         title = holder.tv_title;
         addFood = holder.tv_addFood;
+        editFood = holder.tv_editFood;
 
         image.setImageResource(foodItem.getImage());
 
@@ -56,6 +57,14 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(mContext,Menu_makanan.class);
+                mContext.startActivity(intent);
+            }
+        });
+
+        editFood.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(mContext,editFoodActivity.class);
                 mContext.startActivity(intent);
             }
         });
@@ -70,13 +79,14 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
     public class ViewHolder extends RecyclerView.ViewHolder{
 
         ImageView iv_base;
-        TextView tv_title, tv_addFood;
+        TextView tv_title, tv_addFood, tv_editFood;
         public ViewHolder(View itemView) {
             super(itemView);
 
             iv_base = itemView.findViewById(R.id.iv_base);
             tv_title = itemView.findViewById(R.id.tv_title);
             tv_addFood = itemView.findViewById(R.id.tv_addFood);
+            tv_editFood = itemView.findViewById(R.id.tv_editFood);
 
         }
     }
