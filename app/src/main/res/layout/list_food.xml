@@ -47,10 +47,11 @@
             android:text="Cal"/>
         <EditText
             android:id="@+id/ed_serving_cal"
-            android:text="12321"
+            android:text="0"
             android:layout_below="@id/text_view_calories"
             android:layout_width="200dp"
             android:layout_height="wrap_content"
+            android:inputType="numberDecimal"
             android:visibility="invisible"/>
 <!--        <TextView-->
 <!--            android:layout_width="wrap_content"-->

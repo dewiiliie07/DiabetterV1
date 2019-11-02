@@ -51,22 +51,55 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.MyViewHolder> 
         holder.ed_serv_cal.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
+                /*Float cal = Float.parseFloat(charSequence.toString()) * Float.parseFloat(mCalories.get(position));
+                if(charSequence.length() == 0){
+                    for (String food : addedFood) {
+                        addedFood.remove(food);
+                    }
+                }*/
+                //Toast.makeText(mContext, "beforeTextChange", Toast.LENGTH_SHORT).show();
             }
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+                /*if(charSequence.length() == 0){
+                    for (String food : addedFood) {
+                        addedFood.remove(food);
+                    }
+                }*/
                 if(charSequence.length() != 0){
                     Float cal = Float.parseFloat(charSequence.toString()) * Float.parseFloat(mCalories.get(position));
-                    //Toast.makeText(mContext, cal.toString(), Toast.LENGTH_SHORT).show();
-                    addedFood.add(mFoodName.get(position)+" "+cal);
-                    Toast.makeText(mContext, addedFood.toString(), Toast.LENGTH_SHORT).show();
+
+                    if(addedFood.isEmpty()){
+                        addedFood.add(mFoodName.get(position)+" "+cal);
+                    }
+                    else{
+                        for (String food: addedFood){
+                            if(mFoodName.get(position).equals(food.substring(0, mFoodName.get(position).length()))){ // kalo makanan yg di klik, sama kyak yg di added
+                                //update
+                                //hapus+add
+                                addedFood.remove(food);
+                                break;
+                            }
+                        }
+                        addedFood.add(mFoodName.get(position)+" "+cal);
+                    }
+                    //Toast.makeText(mContext, addedFood.toString(), Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
             public void afterTextChanged(Editable editable) {
-
+                //Toast.makeText(mContext, editable.toString(), Toast.LENGTH_SHORT).show();
+                if (editable.toString().length() == 0 ){
+                    for (String food : addedFood){
+                        if(mFoodName.get(position).equals(food.substring(0, mFoodName.get(position).length()))){
+                            //Toast.makeText(mContext, food, Toast.LENGTH_SHORT).show();
+                            addedFood.remove(food);
+                        }
+                    }
+                }
             }
         });
         holder.btnAdd.setOnClickListener(new View.OnClickListener() {
@@ -84,10 +117,11 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.MyViewHolder> 
         holder.btnRemove.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                holder.ed_serv_cal.setText("");
                 holder.ed_serv_cal.setVisibility(View.INVISIBLE);
                 holder.btnAdd.setVisibility(View.VISIBLE);
                 holder.btnRemove.setVisibility(View.INVISIBLE);
-                addedFood.remove(position);
+                //addedFood.remove(position);
                 Toast.makeText(mContext, addedFood.toString(), Toast.LENGTH_SHORT).show();
             }
         });
