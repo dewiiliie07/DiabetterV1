@@ -5,13 +5,14 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 import android.widget.Toolbar;
 
 public class Gender extends AppCompatActivity {
     String full_name, email, password, birthdate;
     float height, weight;
 
-    private Button btnNext;
+    private Button btnNext, btnMale, btnFemale;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,22 +43,42 @@ public class Gender extends AppCompatActivity {
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        btnNext = (Button) findViewById(R.id.btn_next_to_birthdate);
-        btnNext.setOnClickListener(new View.OnClickListener() {
+        btnMale = (Button) findViewById(R.id.btn_male);
+        btnMale.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(Gender.this,Birthdate.class);
-
-                intent.putExtra("FULLNAME", full_name);
-                intent.putExtra("EMAIL", email);
-                intent.putExtra("PASSWORD", password);
-                intent.putExtra("BIRTHDATE", birthdate);
-                intent.putExtra("HEIGHT", height);
-                intent.putExtra("WEIGHT", weight);
-                intent.putExtra("GENDER", "M");
+                Toast.makeText(Gender.this,"Male",Toast.LENGTH_SHORT).show();
                 startActivity(intent);
-                finish();
             }
         });
+
+        btnFemale = (Button) findViewById(R.id.btn_female);
+        btnFemale.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Gender.this,Birthdate.class);
+                Toast.makeText(Gender.this,"Female",Toast.LENGTH_SHORT).show();
+                startActivity(intent);
+            }
+        });
+
+//        btnNext = (Button) findViewById(R.id.btn_next_to_birthdate);
+//        btnNext.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Intent intent = new Intent(Gender.this,Birthdate.class);
+//
+//                intent.putExtra("FULLNAME", full_name);
+//                intent.putExtra("EMAIL", email);
+//                intent.putExtra("PASSWORD", password);
+//                intent.putExtra("BIRTHDATE", birthdate);
+//                intent.putExtra("HEIGHT", height);
+//                intent.putExtra("WEIGHT", weight);
+//                intent.putExtra("GENDER", "M");
+//                startActivity(intent);
+//                finish();
+//            }
+//        });
     }
 }

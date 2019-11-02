@@ -55,11 +55,11 @@ public class HomeFragment extends Fragment {
 
         addFoodList = new ArrayList<>();
 
-        addFoodList.add(new Model(R.drawable.base_add_food,"Today's Breakfast","Add Food"));
-        addFoodList.add(new Model(R.drawable.base_add_food,"Today's Breakfast Snacks","Add Food"));
-        addFoodList.add(new Model(R.drawable.base_add_food,"Today's Lunch","Add Food"));
-        addFoodList.add(new Model(R.drawable.base_add_food,"Today's Lunch Snacks","Add Food"));
-        addFoodList.add(new Model(R.drawable.base_add_food,"Today's Dinner","Add Food"));
+        addFoodList.add(new Model(R.drawable.base_add_food,"Today's Breakfast","Add Food","edit text"));
+        addFoodList.add(new Model(R.drawable.base_add_food,"Today's Breakfast Snacks","Add Food","edit text"));
+        addFoodList.add(new Model(R.drawable.base_add_food,"Today's Lunch","Add Food","edit text"));
+        addFoodList.add(new Model(R.drawable.base_add_food,"Today's Lunch Snacks","Add Food","edit text"));
+        addFoodList.add(new Model(R.drawable.base_add_food,"Today's Dinner","Add Food","edit text"));
 
 //        LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
 //        RecyclerView.LayoutManager rvLiLayoutManager = layoutManager;

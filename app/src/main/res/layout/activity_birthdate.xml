@@ -27,16 +27,23 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center_vertical">
-        <CalendarView
-            android:id="@+id/calendarView3"
-            android:layout_margin="20dp"
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/rectangle_edit_text"
-            android:elevation="3dp" />
+            android:layout_height="80dp"
+            android:layout_margin="30dp"
+            android:background="@drawable/base_list_food"
+            android:gravity="center">
+            <TextView
+                android:id="@+id/tv_birthdate"
+                android:textColor="#FF8A00"
+                android:textSize="20dp"
+                android:textAlignment="center"
+                android:text="MM/DD/YYYY"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"></TextView>
 
+        </RelativeLayout>
     </RelativeLayout>
-
 
 
     <Button
