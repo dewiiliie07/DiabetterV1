@@ -60,8 +60,8 @@ public class TermCondition extends AppCompatActivity {
         btnNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                final Intent intent = new Intent(TermCondition.this,MenuUtama.class);
-                /*Toast.makeText(TermCondition.this,
+                final Intent intent = new Intent(TermCondition.this, MainActivity.class);
+                Toast.makeText(TermCondition.this,
                         full_name+" "
                         +email+" "
                         +password+" "
@@ -70,7 +70,7 @@ public class TermCondition extends AppCompatActivity {
                         +weight+" "
                         +gender+" "
                         +activity_level,
-                        Toast.LENGTH_SHORT).show();*/
+                        Toast.LENGTH_SHORT).show();
                 mApiInterface = ApiClient.getClient().create(ApiInterface.class);
                 Call<RegisterUser> postRegUsers = mApiInterface.postUser(
                         full_name,
@@ -95,8 +95,8 @@ public class TermCondition extends AppCompatActivity {
                         Toast.makeText(TermCondition.this, t.toString(), Toast.LENGTH_SHORT).show();
                     }
                 });
-                //startActivity(intent);
-                //finish();
+                startActivity(intent);
+                finish();
             }
         });
     }

@@ -6,6 +6,9 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -13,6 +16,7 @@ public class Menu_makanan extends AppCompatActivity {
 
     private ArrayList<String> mFoodNames = new ArrayList<>();
     private ArrayList<String> mCalories = new ArrayList<>();
+    private Button btn_confirm;
     private RecyclerView recyclerView;
 
     @Override
@@ -26,10 +30,15 @@ public class Menu_makanan extends AppCompatActivity {
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+        btn_confirm = (Button) findViewById(R.id.btn_confirm);
 
-
+        btn_confirm.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                FoodAdapter.getFood();
+            }
+        });
         initFoodList();
-
     }
 
     @Override
@@ -44,7 +53,7 @@ public class Menu_makanan extends AppCompatActivity {
 
     private void initFoodList(){
         mFoodNames.add("Jagung Rebus");
-        mCalories.add("90,2");
+        mCalories.add("90.2");
 
         mFoodNames.add("Kentang Rebus");
         mCalories.add("166");

@@ -42,8 +42,9 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 String username = et_username.getText().toString();
                 String password = et_password.getText().toString();
-
-                if(username.equals(null) || username.equals("") || password.equals(null) || password.equals("")){
+                Intent intent = new Intent(MainActivity.this,MenuUtama.class);
+                startActivity(intent);
+                /*if(username.equals(null) || username.equals("") || password.equals(null) || password.equals("")){
                     Toast.makeText(MainActivity.this, "Email/password is empty", Toast.LENGTH_SHORT).show();
                 }
                 else{
@@ -68,7 +69,7 @@ public class MainActivity extends AppCompatActivity {
                             Toast.makeText(MainActivity.this, "Something went wrong on server", Toast.LENGTH_SHORT).show();
                         }
                     });
-                }
+                }*/
 
             }
         });

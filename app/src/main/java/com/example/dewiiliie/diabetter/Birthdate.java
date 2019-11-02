@@ -13,11 +13,12 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.Calendar;
 
 public class Birthdate extends AppCompatActivity {
-    String full_name, email, password;
+    String full_name, email, password, gender, dob;
 
     private Button btnNext;
     private TextView mDisplayDate;
@@ -49,8 +50,9 @@ public class Birthdate extends AppCompatActivity {
             @Override
             public void onDateSet(DatePicker datePicker, int year, int month, int day) {
                 month = month +1;
-                String date = month + "/" + day + "/" + year;
-                mDisplayDate.setText(date);
+                //String date = month + "/" + day + "/" + year;
+                dob = year+ "-" + month + "-" + day;
+                mDisplayDate.setText(dob);
             }
         };
 
@@ -60,11 +62,13 @@ public class Birthdate extends AppCompatActivity {
                 full_name = extras.getString("FULLNAME");
                 email = extras.getString("EMAIL");
                 password = extras.getString("PASSWORD");
+                gender = extras.getString("GENDER");
             }
         } else{
             full_name = (String) savedInstanceState.getSerializable("FULLNAME");
             email = (String) savedInstanceState.getSerializable("EMAIL");
             password = (String) savedInstanceState.getSerializable("PASSWORD");
+            gender = (String) savedInstanceState.getSerializable("GENDER");
         }
 
 
@@ -82,7 +86,9 @@ public class Birthdate extends AppCompatActivity {
                 intent.putExtra("FULLNAME", full_name);
                 intent.putExtra("EMAIL", email);
                 intent.putExtra("PASSWORD", password);
-                intent.putExtra("BIRTHDATE", "2019-10-09");
+                intent.putExtra("GENDER", gender);
+                intent.putExtra("BIRTHDATE", dob);
+                Toast.makeText(Birthdate.this, full_name+ " "+ email+" "+password+" "+gender+" "+dob, Toast.LENGTH_SHORT).show();
                 startActivity(intent);
                 finish();
             }

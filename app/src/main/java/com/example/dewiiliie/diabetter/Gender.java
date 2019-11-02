@@ -24,17 +24,17 @@ public class Gender extends AppCompatActivity {
                 full_name = extras.getString("FULLNAME");
                 email = extras.getString("EMAIL");
                 password = extras.getString("PASSWORD");
-                birthdate = extras.getString("BIRTHDATE");
-                height = extras.getFloat("HEIGHT");
-                weight = extras.getFloat("WEIGHT");
+                //birthdate = extras.getString("BIRTHDATE");
+                //height = extras.getFloat("HEIGHT");
+                //weight = extras.getFloat("WEIGHT");
             }
         } else{
             full_name = (String) savedInstanceState.getSerializable("FULLNAME");
             email = (String) savedInstanceState.getSerializable("EMAIL");
             password = (String) savedInstanceState.getSerializable("PASSWORD");
-            birthdate = (String) savedInstanceState.getSerializable("BIRTHDATE");
-            height = (Float) savedInstanceState.getSerializable("HEIGHT");
-            weight = (Float) savedInstanceState.getSerializable("WEIGHT");
+            //birthdate = (String) savedInstanceState.getSerializable("BIRTHDATE");
+            //height = (Float) savedInstanceState.getSerializable("HEIGHT");
+            //weight = (Float) savedInstanceState.getSerializable("WEIGHT");
         }
 
         android.support.v7.widget.Toolbar toolbar = findViewById(R.id.toolbar_gender);
@@ -48,7 +48,16 @@ public class Gender extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(Gender.this,Birthdate.class);
-                Toast.makeText(Gender.this,"Male",Toast.LENGTH_SHORT).show();
+                intent.putExtra("FULLNAME", full_name);
+                intent.putExtra("EMAIL", email);
+                intent.putExtra("PASSWORD", password);
+                intent.putExtra("GENDER", "M");
+                /*intent.putExtra("BIRTHDATE", birthdate);
+                intent.putExtra("HEIGHT", height);
+                intent.putExtra("WEIGHT", weight);*/
+
+//                Toast.makeText(Gender.this,full_name+" "+email+ " "+password,Toast.LENGTH_SHORT).show();
+
                 startActivity(intent);
             }
         });
@@ -58,7 +67,16 @@ public class Gender extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(Gender.this,Birthdate.class);
-                Toast.makeText(Gender.this,"Female",Toast.LENGTH_SHORT).show();
+                intent.putExtra("FULLNAME", full_name);
+                intent.putExtra("EMAIL", email);
+                intent.putExtra("PASSWORD", password);
+                intent.putExtra("GENDER", "F");
+                /*intent.putExtra("BIRTHDATE", birthdate);
+                intent.putExtra("HEIGHT", height);
+                intent.putExtra("WEIGHT", weight);*/
+
+                //Toast.makeText(Gender.this,"Female",Toast.LENGTH_SHORT).show();
+                Toast.makeText(Gender.this,full_name+" "+email+ " "+password,Toast.LENGTH_SHORT).show();
                 startActivity(intent);
             }
         });

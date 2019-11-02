@@ -80,33 +80,33 @@ public class JenisAktivitas extends AppCompatActivity implements View.OnClickLis
     }
     @Override
     public void onClick(View v){
+
+        Intent intent = new Intent(JenisAktivitas.this, TermCondition.class);
+        intent.putExtra("FULLNAME", full_name);
+        intent.putExtra("EMAIL", email);
+        intent.putExtra("PASSWORD", password);
+        intent.putExtra("GENDER", gender);
+        intent.putExtra("BIRTHDATE", birthdate);
+        intent.putExtra("HEIGHT", height);
+        intent.putExtra("WEIGHT", weight);
         switch (v.getId()){
             case R.id.btn_istirahat :
-                Toast.makeText(this, "Istirahat", Toast.LENGTH_SHORT).show();
-                Intent i = new Intent(JenisAktivitas.this, TermCondition.class);
-                startActivity(i);
+                intent.putExtra("ACTIVITY_LEVEL", "I");
                 break;
             case R.id.btn_ringan :
-                Toast.makeText(this, "Ringan", Toast.LENGTH_SHORT).show();
-                Intent i2 = new Intent(JenisAktivitas.this, TermCondition.class);
-                startActivity(i2);
+                intent.putExtra("ACTIVITY_LEVEL", "R");
                 break;
             case R.id.btn_sedang :
-                Toast.makeText(this, "Sedang", Toast.LENGTH_SHORT).show();
-                Intent i3 = new Intent(JenisAktivitas.this, TermCondition.class);
-                startActivity(i3);
+                intent.putExtra("ACTIVITY_LEVEL", "S");
                 break;
             case R.id.btn_berat :
-                Toast.makeText(this, "Berat", Toast.LENGTH_SHORT).show();
-                Intent i4 = new Intent(JenisAktivitas.this, TermCondition.class);
-                startActivity(i4);
+                intent.putExtra("ACTIVITY_LEVEL", "B");
                 break;
             case R.id.btn_sangat_berat :
-                Toast.makeText(this, "Sangat Berat", Toast.LENGTH_SHORT).show();
-                Intent i5 = new Intent(JenisAktivitas.this, TermCondition.class);
-                startActivity(i5);
+                intent.putExtra("ACTIVITY_LEVEL", "SB");
                 break;
         }
+        startActivity(intent);
     }
 
 }

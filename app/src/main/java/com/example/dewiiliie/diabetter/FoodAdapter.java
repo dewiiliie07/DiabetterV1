@@ -3,10 +3,13 @@ package com.example.dewiiliie.diabetter;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -16,22 +19,27 @@ import org.w3c.dom.Text;
 import java.util.ArrayList;
 
 public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.MyViewHolder> {
-
+    private static Context mContext; // awalnya ga static
+    private EditText ed_serving_cal;
+    private TextView tv_addFood, tv_rmFood;
     private ArrayList<String> mFoodName = new ArrayList<>();
     private ArrayList<String> mCalories = new ArrayList<>();
-    private Context mContext;
+    private static ArrayList<String> addedFood = new ArrayList<>();
+    //private Context mContext;
 
-    public FoodAdapter(Context mContext, ArrayList<String> mFoodName, ArrayList<String> mCalories) {
+    public FoodAdapter(Context mContext, ArrayList<String> mFoodName, ArrayList<String> mCalories   ) {
         this.mFoodName = mFoodName;
         this.mCalories = mCalories;
         this.mContext = mContext;
     }
 
+    static void getFood(){
+        Toast.makeText(mContext, addedFood.toString(), Toast.LENGTH_SHORT).show();
+    }
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
         View foodView = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_food,parent,false);
-
         return new MyViewHolder(foodView);
     }
 
@@ -39,10 +47,48 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.MyViewHolder> 
     public void onBindViewHolder(final MyViewHolder holder, final int position) {
         holder.foodName.setText(mFoodName.get(position));
         holder.calories.setText(mCalories.get(position));
-        holder.food_layout.setOnClickListener(new View.OnClickListener() {
+        holder.btnAdd.setText("+");
+        holder.ed_serv_cal.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                if(charSequence.length() != 0){
+                    Float cal = Float.parseFloat(charSequence.toString()) * Float.parseFloat(mCalories.get(position));
+                    //Toast.makeText(mContext, cal.toString(), Toast.LENGTH_SHORT).show();
+                    addedFood.add(mFoodName.get(position)+" "+cal);
+                    Toast.makeText(mContext, addedFood.toString(), Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
+        holder.btnAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                Toast.makeText(this, "Istirahat", Toast.LENGTH_SHORT).show();
+                holder.ed_serv_cal.setVisibility(View.VISIBLE);
+                holder.btnAdd.setVisibility(View.INVISIBLE);
+                holder.btnRemove.setVisibility(View.VISIBLE);
+                //addedFood.add(mFoodName.get(position)+" "+(Float.parseFloat(mCalories.get(position))* Float.parseFloat(ed_serving_cal.getText().toString())));
+                // belum bisa karena ed_serv_cal msih invisible,
+                // cari tau gimana biar klik visible, edit, baru confirm
+                Toast.makeText(mContext, addedFood.toString(), Toast.LENGTH_SHORT).show();
+            }
+        });
+        holder.btnRemove.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                holder.ed_serv_cal.setVisibility(View.INVISIBLE);
+                holder.btnAdd.setVisibility(View.VISIBLE);
+                holder.btnRemove.setVisibility(View.INVISIBLE);
+                addedFood.remove(position);
+                Toast.makeText(mContext, addedFood.toString(), Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -53,13 +99,17 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.MyViewHolder> 
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
-        TextView foodName, calories;
-        RelativeLayout food_layout;
+        TextView foodName, calories, btnAdd, btnRemove;
+        EditText ed_serv_cal;
+        //RelativeLayout food_layout;
         public MyViewHolder(View itemView) {
             super(itemView);
             foodName = itemView.findViewById(R.id.text_view_food_name);
             calories = itemView.findViewById(R.id.text_view_calories);
-            food_layout = itemView.findViewById(R.id.list_food_layout);
+            btnAdd = itemView.findViewById(R.id.tv_addFood);
+            btnRemove = itemView.findViewById(R.id.tv_rmFood);
+            ed_serv_cal = itemView.findViewById(R.id.ed_serving_cal);
+            //food_layout = itemView.findViewById(R.id.list_food_layout);
         }
     }
 

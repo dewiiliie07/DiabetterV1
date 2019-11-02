@@ -7,9 +7,10 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 public class Tall extends AppCompatActivity {
-    String full_name, email, password, birthdate;
+    String full_name, email, password, gender, birthdate;
 
     private Button btnNext;
     @Override
@@ -23,12 +24,14 @@ public class Tall extends AppCompatActivity {
                 full_name = extras.getString("FULLNAME");
                 email = extras.getString("EMAIL");
                 password = extras.getString("PASSWORD");
+                gender = extras.getString("GENDER");
                 birthdate = extras.getString("BIRTHDATE");
             }
         } else{
             full_name = (String) savedInstanceState.getSerializable("FULLNAME");
             email = (String) savedInstanceState.getSerializable("EMAIL");
             password = (String) savedInstanceState.getSerializable("PASSWORD");
+            gender = (String) savedInstanceState.getSerializable("GENDER");
             birthdate = (String) savedInstanceState.getSerializable("BIRTHDATE");
         }
 
@@ -51,8 +54,18 @@ public class Tall extends AppCompatActivity {
                 intent.putExtra("FULLNAME", full_name);
                 intent.putExtra("EMAIL", email);
                 intent.putExtra("PASSWORD", password);
+                intent.putExtra("GENDER", gender);
                 intent.putExtra("BIRTHDATE", birthdate);
                 intent.putExtra("HEIGHT", height);
+
+//                Toast.makeText(Tall.this,
+//                        full_name+" "+
+//                                email+" "+
+//                                password+" "+
+//                                gender+" "+
+//                                birthdate+" "+
+//                                height
+//                        , Toast.LENGTH_SHORT).show();
 
                 startActivity(intent);
                 finish();
