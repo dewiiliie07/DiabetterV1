@@ -5,76 +5,94 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".editFoodActivity">
-
-    <RelativeLayout
-        android:id="@+id/rl_food"
+    <android.support.v7.widget.Toolbar
+        android:layout_marginTop="20dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
-        >
-        <TextView
-            android:id="@+id/tv_food_choosen"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_marginLeft="60dp"
-            android:textSize="24dp"
-            android:textColor="#000000"
-            android:text="Food Name" />
+        android:id="@+id/toolbar_edit_food"></android.support.v7.widget.Toolbar>
 
-        <TextView
-            android:id="@+id/tv_calories_choosen"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="0dp"
-            android:layout_toLeftOf="@+id/tvCalGram"
-            android:layout_marginRight="5dp"
-            android:layout_centerHorizontal="true"
-            android:text="10"
-            android:textColor="#000000"
-            android:textSize="24dp" />
-        <TextView
-            android:id="@+id/tvCalGram"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:textSize="24dp"
-            android:layout_marginRight="60dp"
-            android:textColor="#000000"
-            android:text="Cal/Gram"
-            />
-
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:layout_below="@+id/rl_food"
+    <ScrollView
+        android:layout_below="@+id/toolbar_edit_food"
         android:layout_width="match_parent"
-        android:layout_height="70dp"
-        android:layout_marginTop="10dp"
-        android:gravity="center_vertical"
-        android:background="@drawable/base_list_food"
-        android:layout_marginLeft="40dp"
-        android:layout_marginRight="40dp"
-        android:paddingLeft="25dp"
-        android:paddingRight="25dp"
-        >
-
-        <TextView
-            android:id="@+id/tv_food_weight"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="Insert food's weight" />
-
-        <TextView
-            android:id="@+id/text_view_calories"
+        android:layout_height="match_parent">
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rv_edit_food"
+            android:scrollbars="vertical"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignTop="@+id/text_view_food_name"
-            android:layout_gravity="center"
-            android:gravity="right"
-            android:text="Gram" />
-    </RelativeLayout>
+            android:layout_height="match_parent"
+            android:layout_below="@id/btn_confirm">
+        </android.support.v7.widget.RecyclerView>
+    </ScrollView>
+
+<!--    <RelativeLayout-->
+<!--        android:id="@+id/rl_food"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginTop="50dp"-->
+<!--        >-->
+<!--        <TextView-->
+<!--            android:id="@+id/tv_food_choosen"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_alignParentLeft="true"-->
+<!--            android:layout_marginLeft="30dp"-->
+<!--            android:textSize="24dp"-->
+<!--            android:textColor="#000000"-->
+<!--            android:text="Food Name" />-->
+
+<!--        <TextView-->
+<!--            android:id="@+id/tv_calories_choosen"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginTop="0dp"-->
+<!--            android:layout_toLeftOf="@+id/tvCalGram"-->
+<!--            android:layout_marginRight="5dp"-->
+<!--            android:layout_centerHorizontal="true"-->
+<!--            android:text="10"-->
+<!--            android:textColor="#000000"-->
+<!--            android:textSize="24dp" />-->
+<!--        <TextView-->
+<!--            android:id="@+id/tvCalGram"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_alignParentRight="true"-->
+<!--            android:textSize="24dp"-->
+<!--            android:layout_marginRight="30dp"-->
+<!--            android:textColor="#000000"-->
+<!--            android:text="Cal/Gram"-->
+<!--            />-->
+
+<!--    </RelativeLayout>-->
+
+<!--    <RelativeLayout-->
+<!--        android:layout_below="@+id/rl_food"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="70dp"-->
+<!--        android:layout_marginTop="5dp"-->
+<!--        android:gravity="center_vertical"-->
+<!--        android:background="@drawable/base_list_food"-->
+<!--        android:layout_marginLeft="20dp"-->
+<!--        android:layout_marginRight="20dp"-->
+<!--        android:paddingLeft="25dp"-->
+<!--        android:paddingRight="25dp"-->
+<!--        >-->
+
+<!--        <TextView-->
+<!--            android:id="@+id/tv_food_weight"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_gravity="center"-->
+<!--            android:text="Insert food's weight" />-->
+
+<!--        <TextView-->
+<!--            android:id="@+id/text_view_calories"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_alignTop="@+id/text_view_food_name"-->
+<!--            android:layout_gravity="center"-->
+<!--            android:gravity="right"-->
+<!--            android:text="Gram" />-->
+<!--    </RelativeLayout>-->
 
     <Button
         android:id="@+id/btn"

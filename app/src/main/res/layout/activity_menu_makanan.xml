@@ -12,22 +12,32 @@
         android:layout_height="wrap_content"
         android:id="@+id/toolbar_food_list"></android.support.v7.widget.Toolbar>
 
-    <SearchView
-        android:id="@+id/sv_food"
+    <RelativeLayout
+        android:id="@+id/rl_search"
         android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:layout_marginTop="30dp"
-        android:gravity="fill"
+        android:layout_height="50dp"
         android:layout_below="@id/toolbar_food_list"
-        android:background="@drawable/base_search"
-        ></SearchView>
+        android:background="@drawable/base_search">
+        <SearchView
+            android:id="@+id/sv_food"
+            android:paddingLeft="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="fill"
+            ></SearchView>
+
+    </RelativeLayout>
+
     <Button
         android:id="@+id/btn_confirm"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="20px"
         android:text="Confirm"
-        android:layout_below="@id/sv_food"/>
+        android:fontFamily="@font/montserrat_bold"
+        android:textColor="#FFFFFF"
+        android:background="@drawable/button_background"
+        android:layout_below="@id/rl_search"/>
     <android.support.v7.widget.RecyclerView
         android:id="@+id/my_recycler_view"
         android:scrollbars="vertical"
