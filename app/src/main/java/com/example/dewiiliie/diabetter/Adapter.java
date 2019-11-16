@@ -3,6 +3,7 @@ package com.example.dewiiliie.diabetter;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v4.view.PagerAdapter;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,11 +21,12 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
 
     private Context mContext;
     private ArrayList<Model> mList;
+
+
     Adapter(Context context, ArrayList<Model> list){
         mContext = context;
         mList = list;
     }
-
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -33,10 +35,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
 
         View view = layoutInflater.inflate(R.layout.add_food,parent,false);
 
-        ViewHolder viewHolder = new ViewHolder(view);
-
-
-        return viewHolder;
+        return new ViewHolder(view);
     }
 
     @Override
@@ -69,6 +68,17 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
             }
         });
 
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(mContext, LinearLayoutManager.VERTICAL, false);
+        holder.rv_FoodChoosen.setLayoutManager(layoutManager);
+        holder.rv_FoodChoosen.setHasFixedSize(true);
+
+        ArrayList<ChildModel> list = new ArrayList<>();
+        ChildModel childModel = new ChildModel("Jagung bakar","30","cal");
+        list.add(childModel);
+        holder.rv_FoodChoosen.setLayoutManager(new LinearLayoutManager(mContext));
+        ChildRecyclerFoodAdapter childRecyclerFoodAdapter = new ChildRecyclerFoodAdapter(list, mContext);
+        holder.rv_FoodChoosen.setAdapter(childRecyclerFoodAdapter);
+
     }
 
     @Override
@@ -80,6 +90,8 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
 
         ImageView iv_base;
         TextView tv_title, tv_addFood, tv_editFood;
+        RecyclerView rv_FoodChoosen;
+
         public ViewHolder(View itemView) {
             super(itemView);
 
@@ -87,6 +99,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
             tv_title = itemView.findViewById(R.id.tv_title);
             tv_addFood = itemView.findViewById(R.id.tv_addFood);
             tv_editFood = itemView.findViewById(R.id.tv_editFood);
+            rv_FoodChoosen = itemView.findViewById(R.id.rv_list_makanan_choosen);
 
         }
     }

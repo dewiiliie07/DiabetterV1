@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <RelativeLayout
+        android:layout_marginLeft="32dp"
+        android:layout_width="300dp"
+        android:layout_height="300dp">
+                <TextView
+                    android:id="@+id/tv_food_choosen_child"
+                    android:text="Food"
+                    android:paddingLeft="10dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+                <TextView
+                    android:id="@+id/tv_cal"
+                    android:text="Cal"
+                    android:paddingRight="10dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+                <TextView
+                    android:id="@+id/tv_calories_choosen"
+                    android:layout_toLeftOf="@+id/tv_cal"
+                    android:paddingRight="10dp"
+                    android:text="10"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+    </RelativeLayout>
+
+</RelativeLayout>

@@ -135,6 +135,9 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.MyViewHolder> 
     public class MyViewHolder extends RecyclerView.ViewHolder {
         TextView foodName, calories, btnAdd, btnRemove;
         EditText ed_serv_cal;
+//        RecyclerView rv_FoodChoosen;
+
+
         //RelativeLayout food_layout;
         public MyViewHolder(View itemView) {
             super(itemView);
@@ -143,6 +146,7 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.MyViewHolder> 
             btnAdd = itemView.findViewById(R.id.tv_addFood);
             btnRemove = itemView.findViewById(R.id.tv_rmFood);
             ed_serv_cal = itemView.findViewById(R.id.ed_serving_cal);
+//            rv_FoodChoosen = itemView.findViewById(R.id.rv_list_makanan_choosen);
             //food_layout = itemView.findViewById(R.id.list_food_layout);
         }
     }

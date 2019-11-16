@@ -49,12 +49,41 @@
 
             <android.support.v7.widget.RecyclerView
                 android:layout_marginLeft="32dp"
-                android:id="@+id/rv_list_makanan"
+                android:id="@+id/rv_list_makanan_choosen"
                 android:layout_width="wrap_content"
                 android:layout_height="126dp"
                 android:layout_below="@+id/tv_title"
                 android:layout_marginBottom="16dp"
                 ></android.support.v7.widget.RecyclerView>
+
+            <TextView
+                android:layout_marginBottom="5dp"
+                android:layout_below="@+id/rv_list_makanan_choosen"
+                android:id="@+id/tv_total"
+                android:layout_marginLeft="32dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Total"
+                android:textColor="#000000"
+                />
+            <TextView
+                android:layout_below="@+id/rv_list_makanan_choosen"
+                android:textColor="#000000"
+                android:id="@+id/tv_cal2"
+                android:text="cal"
+                android:layout_marginRight="20dp"
+                android:layout_alignParentRight="true"
+                android:paddingRight="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+            <TextView
+                android:layout_below="@+id/rv_list_makanan_choosen"
+                android:textColor="#000000"
+                android:text="0"
+                android:paddingRight="10dp"
+                android:layout_toLeftOf="@+id/tv_cal2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
             <TextView
                 android:id="@+id/tv_addFood"
                 android:layout_width="wrap_content"
@@ -62,7 +91,7 @@
                 android:text="Add Food"
                 android:gravity="center"
                 android:fontFamily="@font/montserrat_bold"
-                android:layout_below="@+id/rv_list_makanan"
+                android:layout_below="@+id/tv_total"
                 android:background="@drawable/button_background"
                 android:textColor="#FFFFFF"
                 android:paddingLeft="32dp"
