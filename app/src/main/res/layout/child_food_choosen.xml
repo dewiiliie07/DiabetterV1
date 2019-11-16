@@ -3,13 +3,11 @@
     xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
     android:layout_height="match_parent">
     <RelativeLayout
-        android:layout_marginLeft="32dp"
         android:layout_width="300dp"
         android:layout_height="300dp">
                 <TextView
                     android:id="@+id/tv_food_choosen_child"
                     android:text="Food"
-                    android:paddingLeft="10dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
                 <TextView
