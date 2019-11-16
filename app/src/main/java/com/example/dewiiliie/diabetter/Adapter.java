@@ -73,7 +73,26 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
         holder.rv_FoodChoosen.setHasFixedSize(true);
 
         ArrayList<ChildModel> list = new ArrayList<>();
-        ChildModel childModel = new ChildModel("Jagung bakar","30","cal");
+
+        ChildModel childModel = null;
+
+        if(position == 0){
+            childModel = new ChildModel("Jagung bakar","30","cal");
+        }
+        if(position == 1){
+            childModel = new ChildModel("Jagung Rebus","10","cal");
+        }
+        if(position == 2){
+            childModel = new ChildModel("Nasi Putih","100","cal");
+        }
+        if(position == 3){
+            childModel = new ChildModel("Apel","25","cal");
+        }
+        if(position == 4){
+            childModel = new ChildModel("Steak","150","cal");
+        }
+
+//        ChildModel childModel = new ChildModel("Jagung bakar","30","cal");
         list.add(childModel);
         holder.rv_FoodChoosen.setLayoutManager(new LinearLayoutManager(mContext));
         ChildRecyclerFoodAdapter childRecyclerFoodAdapter = new ChildRecyclerFoodAdapter(list, mContext);
