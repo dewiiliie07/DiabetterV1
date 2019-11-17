@@ -6,12 +6,23 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.example.dewiiliie.diabetter.handler.GetFoods;
+import com.example.dewiiliie.diabetter.model.Food;
+import com.example.dewiiliie.diabetter.rest.ApiClient;
+import com.example.dewiiliie.diabetter.rest.ApiInterface;
+
 import java.util.ArrayList;
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class Menu_makanan extends AppCompatActivity {
 
@@ -19,6 +30,7 @@ public class Menu_makanan extends AppCompatActivity {
     private ArrayList<String> mCalories = new ArrayList<>();
     private Button btn_confirm;
     private RecyclerView recyclerView;
+    private ApiInterface mApiInterface;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +42,8 @@ public class Menu_makanan extends AppCompatActivity {
         getSupportActionBar().setTitle("Choose Your Food");
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        mApiInterface = ApiClient.getClient().create(ApiInterface.class);
 
         btn_confirm = (Button) findViewById(R.id.btn_confirm);
 
@@ -57,33 +71,27 @@ public class Menu_makanan extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
-
     private void initFoodList(){
-        mFoodNames.add("Jagung Rebus");
-        mCalories.add("90.2");
 
-        mFoodNames.add("Kentang Rebus");
-        mCalories.add("166");
+        Call<GetFoods> foodsCall = mApiInterface.getFoods();
+        foodsCall.enqueue(new Callback<GetFoods>() {
+            @Override
+            public void onResponse(Call<GetFoods> call, Response<GetFoods>
+                    response) {
+                ArrayList<Food> foods = response.body().getFoods();
+                for(Food food : foods){
+                    mFoodNames.add(food.getName());
+                    mCalories.add(Float.toString(food.getCalories()));
+                }
+                initRecycleView();
+            }
 
-        mFoodNames.add("Ketan Putih");
-        mCalories.add("217");
+            @Override
+            public void onFailure(Call<GetFoods> call, Throwable t) {
+                Log.e("Retrofit Get", t.toString());
+            }
+        });
 
-        mFoodNames.add("Ketupat");
-        mCalories.add("32");
-
-        mFoodNames.add("Lontong");
-        mCalories.add("38");
-
-        mFoodNames.add("Nasi Putih");
-        mCalories.add("175");
-
-        mFoodNames.add("Bubur");
-        mCalories.add("44");
-
-        mFoodNames.add("Makaroni");
-        mCalories.add("91");
-
-        initRecycleView();
     }
 
     private void initRecycleView(){

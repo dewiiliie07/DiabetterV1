@@ -75,11 +75,11 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
         holder.rv_FoodChoosen.setLayoutManager(layoutManager);
         holder.rv_FoodChoosen.setHasFixedSize(true);
 
-        ArrayList<ChildModel> list = new ArrayList<>();
+        ArrayList<ChildModel> list = new ArrayList<>(); // ChildModel as ChoosenFood
 
         ChildModel childModel = null;
 
-        if(position == 0){
+        if(position == 0){ // ChosenFood WHERE consume_type = BREAKFAST
             //childModel = new ChildModel("Jagung bakar","30","cal");
             list.add(new ChildModel("Jagung Rebus","10","cal"));
             list.add(new ChildModel("Jagung Rebusan","12","cal"));

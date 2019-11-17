@@ -3,11 +3,14 @@ package com.example.dewiiliie.diabetter.handler;
 import com.example.dewiiliie.diabetter.model.Food;
 import com.google.gson.annotations.SerializedName;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class GetFoods {
     @SerializedName("status")
     String status;
     @SerializedName("result")
-    Food food;
+    ArrayList<Food> foods;
     @SerializedName("message")
     String message;
 
@@ -15,8 +18,8 @@ public class GetFoods {
         return status;
     }
 
-    public Food getFood() {
-        return food;
+    public ArrayList<Food> getFoods() {
+        return foods;
     }
 
     /*public void setUser(Food user) {

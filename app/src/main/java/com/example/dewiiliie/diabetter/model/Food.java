@@ -1,9 +1,15 @@
 package com.example.dewiiliie.diabetter.model;
 
+import com.google.gson.annotations.SerializedName;
+
 public class Food {
+    @SerializedName("food_id")
     private int id;
+    @SerializedName("food_name")
     private String name;
+    @SerializedName("calories")
     private float calories;
+    @SerializedName("serving_calories")
     private int serving_calories; // satuannya gram
 
 

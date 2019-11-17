@@ -31,6 +31,6 @@ public interface ApiInterface {
             @Field("password") String password
     );
 
-    @GET("user_android/get_foods")
+    @GET("food_android")
     Call<GetFoods> getFoods();
 }
