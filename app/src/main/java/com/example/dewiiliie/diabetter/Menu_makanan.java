@@ -1,5 +1,6 @@
 package com.example.dewiiliie.diabetter;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -36,6 +37,12 @@ public class Menu_makanan extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 FoodAdapter.getFood();
+                //FoodAdapter.addedFood;
+
+                Intent intent = new Intent(getApplicationContext(), MenuUtama.class);
+                startActivity(intent);
+                //intent.putStringArrayListExtra("stock_list", stock_list);
+                // OR masukin ke db
             }
         });
         initFoodList();

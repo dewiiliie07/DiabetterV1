@@ -24,7 +24,7 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.MyViewHolder> 
     private TextView tv_addFood, tv_rmFood;
     private ArrayList<String> mFoodName = new ArrayList<>();
     private ArrayList<String> mCalories = new ArrayList<>();
-    private static ArrayList<String> addedFood = new ArrayList<>();
+    static ArrayList<String> addedFood = new ArrayList<>();
     //private Context mContext;
 
     public FoodAdapter(Context mContext, ArrayList<String> mFoodName, ArrayList<String> mCalories   ) {

@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.w3c.dom.Text;
 
@@ -43,11 +44,12 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
 
         Model foodItem = mList.get(position);
         ImageView image = holder.iv_base;
-        TextView title, addFood, editFood;
+        TextView title, addFood, editFood, totalCals;
 
         title = holder.tv_title;
         addFood = holder.tv_addFood;
         editFood = holder.tv_editFood;
+        totalCals = holder.tv_total_cals;
 
         image.setImageResource(foodItem.getImage());
 
@@ -63,8 +65,9 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
         editFood.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(mContext,editFoodActivity.class);
-                mContext.startActivity(intent);
+                //Intent intent = new Intent(mContext,editFoodActivity.class);
+                //mContext.startActivity(intent);
+                Toast.makeText(mContext, "This feature is unused", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -77,23 +80,34 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
         ChildModel childModel = null;
 
         if(position == 0){
-            childModel = new ChildModel("Jagung bakar","30","cal");
+            //childModel = new ChildModel("Jagung bakar","30","cal");
+            list.add(new ChildModel("Jagung Rebus","10","cal"));
+            list.add(new ChildModel("Jagung Rebusan","12","cal"));
         }
         if(position == 1){
             childModel = new ChildModel("Jagung Rebus","10","cal");
+            list.add(childModel);
         }
         if(position == 2){
             childModel = new ChildModel("Nasi Putih","100","cal");
+            list.add(childModel);
         }
         if(position == 3){
             childModel = new ChildModel("Apel","25","cal");
+            list.add(childModel);
         }
         if(position == 4){
             childModel = new ChildModel("Steak","150","cal");
+            list.add(childModel);
         }
 
+        int convertedTotalCals = 0;
+        for(ChildModel li : list){
+            convertedTotalCals += Integer.parseInt(li.calChoosen);
+        }
+        totalCals.setText(convertedTotalCals+"");
 //        ChildModel childModel = new ChildModel("Jagung bakar","30","cal");
-        list.add(childModel);
+        //list.add(childModel);
         holder.rv_FoodChoosen.setLayoutManager(new LinearLayoutManager(mContext));
         ChildRecyclerFoodAdapter childRecyclerFoodAdapter = new ChildRecyclerFoodAdapter(list, mContext);
         holder.rv_FoodChoosen.setAdapter(childRecyclerFoodAdapter);
@@ -108,7 +122,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
     public class ViewHolder extends RecyclerView.ViewHolder{
 
         ImageView iv_base;
-        TextView tv_title, tv_addFood, tv_editFood;
+        TextView tv_title, tv_addFood, tv_editFood, tv_total_cals;
         RecyclerView rv_FoodChoosen;
 
         public ViewHolder(View itemView) {
@@ -118,6 +132,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
             tv_title = itemView.findViewById(R.id.tv_title);
             tv_addFood = itemView.findViewById(R.id.tv_addFood);
             tv_editFood = itemView.findViewById(R.id.tv_editFood);
+            tv_total_cals = itemView.findViewById(R.id.tv_total_cals);
             rv_FoodChoosen = itemView.findViewById(R.id.rv_list_makanan_choosen);
 
         }
