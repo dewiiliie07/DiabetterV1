@@ -1,7 +1,12 @@
 package com.example.dewiiliie.diabetter.model;
 
-public class User {
+import com.google.gson.annotations.SerializedName;
+
+import java.io.Serializable;
+
+public class User implements Serializable {
     private int id;
+    @SerializedName("full_name")
     private String full_name;
     private String email;
     private String birthdate;

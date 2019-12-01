@@ -11,8 +11,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.dewiiliie.diabetter.handler.LoginUser;
+import com.example.dewiiliie.diabetter.model.User;
 import com.example.dewiiliie.diabetter.rest.ApiClient;
 import com.example.dewiiliie.diabetter.rest.ApiInterface;
+
+import java.util.ArrayList;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -42,9 +45,9 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 String username = et_username.getText().toString();
                 String password = et_password.getText().toString();
-                Intent intent = new Intent(MainActivity.this,MenuUtama.class);
-                startActivity(intent);
-                /*if(username.equals(null) || username.equals("") || password.equals(null) || password.equals("")){
+//                Intent intent = new Intent(MainActivity.this,MenuUtama.class);
+                //startActivity(intent);
+                if(username.equals(null) || username.equals("") || password.equals(null) || password.equals("")){
                     Toast.makeText(MainActivity.this, "Email/password is empty", Toast.LENGTH_SHORT).show();
                 }
                 else{
@@ -57,6 +60,11 @@ public class MainActivity extends AppCompatActivity {
                             String status = response.body().getStatus();
                             if(status.equals("success")){
                                 Intent intent = new Intent(MainActivity.this,MenuUtama.class);
+                                ArrayList<User> users = response.body().getUsers();
+                                Bundle bundle = new Bundle();
+                                System.out.println("COUNT USER : "+ users.size());
+                                intent.putExtra("user",users);
+//                                Toast.makeText(MainActivity.this, users.get(0).getFull_name(), Toast.LENGTH_SHORT).show();
                                 startActivity(intent);
                             }
                             else{
@@ -69,7 +77,7 @@ public class MainActivity extends AppCompatActivity {
                             Toast.makeText(MainActivity.this, "Something went wrong on server", Toast.LENGTH_SHORT).show();
                         }
                     });
-                }*/
+                }
 
             }
         });

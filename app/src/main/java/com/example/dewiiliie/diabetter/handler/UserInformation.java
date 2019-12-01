@@ -6,11 +6,11 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.ArrayList;
 
-public class LoginUser {
+public class UserInformation {
     @SerializedName("status")
     String status;
     @SerializedName("result")
-    ArrayList<User> users;
+    User user;
     @SerializedName("message")
     String message;
 
@@ -18,21 +18,12 @@ public class LoginUser {
         return status;
     }
 
-    public ArrayList<User> getUsers() {
-        return users;
+    public User getUser() {
+        return user;
     }
-
-//    public void setUsers(ArrayList<User> users) {
-//        this.users = users;
-//    }
-
-    //    public User getUser() {
-//        return user;
-//    }
-//
-//    public void setUser(User user) {
-//        this.user = user;
-//    }
+    public void setUser(User user) {
+        this.user = user;
+    }
 
     public String getMessage() {
         return message;

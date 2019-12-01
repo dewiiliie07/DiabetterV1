@@ -75,24 +75,41 @@
                 android:layout_toRightOf="@id/iv_logo_burning"
                 android:textStyle="bold"
                 android:text="Calories" />
-
-            <TextView
-                android:id="@+id/tv_jumlah_calories"
+            <LinearLayout
+                android:id="@+id/ll_jumlah_calories"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:orientation="horizontal"
                 android:layout_marginLeft="8dp"
                 android:layout_toRightOf="@+id/iv_logo_burning"
                 android:layout_below="@id/tv_tulisan_calories_aja"
-                android:text="0/1200" />
+                >
+                <TextView
+                    android:id="@+id/tv_jumlah_calories"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="0" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="/" />
+                <TextView
+                    android:id="@+id/tv_max_calories"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    tools:text="1200" />
+
+            </LinearLayout>
+
 
             <ProgressBar
                 android:id="@+id/progressBar"
                 style="?android:attr/progressBarStyleHorizontal"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/tv_jumlah_calories"
+                android:layout_below="@+id/ll_jumlah_calories"
                 android:layout_alignStart="@+id/tv_nama_customer"
-                android:layout_marginBottom="38dp" />
+                android:layout_marginBottom="18dp" />
 
 
         </RelativeLayout>

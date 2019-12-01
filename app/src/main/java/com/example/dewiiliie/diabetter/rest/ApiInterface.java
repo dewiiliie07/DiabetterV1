@@ -3,6 +3,7 @@ package com.example.dewiiliie.diabetter.rest;
 import com.example.dewiiliie.diabetter.handler.GetFoods;
 import com.example.dewiiliie.diabetter.handler.LoginUser;
 import com.example.dewiiliie.diabetter.handler.RegisterUser;
+import com.example.dewiiliie.diabetter.handler.UserInformation;
 
 import retrofit2.Call;
 import retrofit2.http.Field;
@@ -33,4 +34,7 @@ public interface ApiInterface {
 
     @GET("food_android")
     Call<GetFoods> getFoods();
+
+    @GET("user_android")
+    Call<UserInformation> getUser();
 }

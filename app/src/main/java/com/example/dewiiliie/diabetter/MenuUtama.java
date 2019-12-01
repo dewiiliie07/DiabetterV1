@@ -25,6 +25,7 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.jaeger.library.StatusBarUtil;
 
@@ -36,6 +37,8 @@ public class MenuUtama extends AppCompatActivity implements BottomNavigationView
 //    ViewPager viewPager;
 //    Adapter adapter;
 //    List<Model> models;
+
+    String full_name;
 //
 //    private Button btnNext;
 //    ArrayList<Model> addFoodList;
@@ -45,7 +48,7 @@ public class MenuUtama extends AppCompatActivity implements BottomNavigationView
 //    private BottomNavigationView mMainNav;
 //    private FrameLayout mMainFrame;
 //
-//    private HomeFragment homeFragment;
+      private HomeFragment homeFragment;
 //    private QuestFragment questFragment;
 //    private LeaderboardFragment leaderboardFragment;
 //    private ProfileFragment profileFragment;
@@ -55,6 +58,14 @@ public class MenuUtama extends AppCompatActivity implements BottomNavigationView
         super.onCreate(savedInstanceState);
         setContentView(R.layout.menu_utama);
 
+//        if(savedInstanceState == null){
+//            Bundle extras = getIntent().getExtras();
+//            if(extras != null){
+//                full_name = extras.getString("FULLNAME");
+//        } else{
+//            full_name = (String) savedInstanceState.getSerializable("FULLNAME");
+//        }
+
 //
 //        activity.window.apply {
 //            clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)
@@ -62,6 +73,12 @@ public class MenuUtama extends AppCompatActivity implements BottomNavigationView
 //            decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
 //            statusBarColor = Color.TRANSPARENT
 //        }
+
+        Toast.makeText(this, getIntent().getExtras().getString("FULLNAME"), Toast.LENGTH_SHORT).show();
+//        Bundle b2 = new Bundle();
+//        b2.putString("FULLNAME",getIntent().getExtras().toString());
+//        homeFragment.setArguments(b2);
+
         if (Build.VERSION.SDK_INT >= 19 && Build.VERSION.SDK_INT < 21) {
             setWindowFlag(this, WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS, true);
         }
