@@ -14,6 +14,9 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.dewiiliie.diabetter.Interface.FoodInterface;
+import com.example.dewiiliie.diabetter.model.Food;
+
 import org.w3c.dom.Text;
 
 import java.util.ArrayList;
@@ -22,15 +25,17 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.MyViewHolder> 
     private static Context mContext; // awalnya ga static
     private EditText ed_serving_cal;
     private TextView tv_addFood, tv_rmFood;
-    private ArrayList<String> mFoodName = new ArrayList<>();
+    private ArrayList<Food> foods = new ArrayList<>();
     private ArrayList<String> mCalories = new ArrayList<>();
-    static ArrayList<String> addedFood = new ArrayList<>();
+    static ArrayList<Food> addedFood = new ArrayList<>();
+    private FoodInterface foodI;
     //private Context mContext;
 
-    public FoodAdapter(Context mContext, ArrayList<String> mFoodName, ArrayList<String> mCalories   ) {
-        this.mFoodName = mFoodName;
-        this.mCalories = mCalories;
+    public FoodAdapter(Context mContext, ArrayList<Food> foods, FoodInterface foodI) {
+        this.foods = foods;
+//        this.mCalories = mCalories;
         this.mContext = mContext;
+        this.foodI = foodI;
     }
 
     static void getFood(){
@@ -45,8 +50,9 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.MyViewHolder> 
 
     @Override
     public void onBindViewHolder(final MyViewHolder holder, final int position) {
-        holder.foodName.setText(mFoodName.get(position));
-        holder.calories.setText(mCalories.get(position));
+        holder.foodName.setText(foods.get(position).getName().toString());
+        holder.calories.setText(String.valueOf(foods.get(position).getCalories()));
+
         holder.btnAdd.setText("+");
         holder.ed_serv_cal.addTextChangedListener(new TextWatcher() {
             @Override
@@ -69,37 +75,44 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.MyViewHolder> 
                     }
                 }*/
                 if(charSequence.length() != 0){
-                    Float cal = Float.parseFloat(charSequence.toString()) * Float.parseFloat(mCalories.get(position));
-
-                    if(addedFood.isEmpty()){
-                        addedFood.add(mFoodName.get(position)+" "+cal);
-                    }
-                    else{
-                        for (String food: addedFood){
-                            if(mFoodName.get(position).equals(food.substring(0, mFoodName.get(position).length()))){ // kalo makanan yg di klik, sama kyak yg di added
-                                //update
-                                //hapus+add
-                                addedFood.remove(food);
-                                break;
-                            }
-                        }
-                        addedFood.add(mFoodName.get(position)+" "+cal);
-                    }
+//                    foodI.onAddFood(foods.get(position).getId(), Integer.parseInt(charSequence.toString()));
+//                    Float cal = Float.parseFloat(charSequence.toString()) * Float.parseFloat(mCalories.get(position));
+//
+//                    if(addedFood.isEmpty()){
+//                        addedFood.add(foods.get(position));
+//
+//                    }
+//                    else{
+//                        for (Food food: addedFood){
+//                            if(mFoodName.get(position).equals(food.substring(0, mFoodName.get(position).length()))){ // kalo makanan yg di klik, sama kyak yg di added
+//                                //update
+//                                //hapus+add
+//                                addedFood.remove(food);
+//                                break;
+//                            }
+//                        }
+//                        addedFood.add(mFoodName.get(position)+" "+cal);
+//                    }
                     //Toast.makeText(mContext, addedFood.toString(), Toast.LENGTH_SHORT).show();
+//                    AddFood
                 }
             }
 
             @Override
             public void afterTextChanged(Editable editable) {
                 //Toast.makeText(mContext, editable.toString(), Toast.LENGTH_SHORT).show();
-                if (editable.toString().length() == 0 ){
-                    for (String food : addedFood){
-                        if(mFoodName.get(position).equals(food.substring(0, mFoodName.get(position).length()))){
-                            //Toast.makeText(mContext, food, Toast.LENGTH_SHORT).show();
-                            addedFood.remove(food);
-                        }
-                    }
+//                if (editable.toString().length() == 0 ){
+//                    for (String food : addedFood){
+//                        if(mFoodName.get(position).equals(food.substring(0, mFoodName.get(position).length()))){
+//                            //Toast.makeText(mContext, food, Toast.LENGTH_SHORT).show();
+//                            addedFood.remove(food);
+//                        }
+//                    }
+//                }
+                if (!holder.ed_serv_cal.getText().toString().equals("")){
+                    foodI.onAddFood(foods.get(position).getId(), Integer.valueOf(holder.ed_serv_cal.getText().toString()));
                 }
+
             }
         });
         holder.btnAdd.setOnClickListener(new View.OnClickListener() {
@@ -111,6 +124,8 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.MyViewHolder> 
                 //addedFood.add(mFoodName.get(position)+" "+(Float.parseFloat(mCalories.get(position))* Float.parseFloat(ed_serving_cal.getText().toString())));
                 // belum bisa karena ed_serv_cal msih invisible,
                 // cari tau gimana biar klik visible, edit, baru confirm
+                holder.ed_serv_cal.setText(String.valueOf(foods.get(position).getServing_calories()));
+                foodI.onAddFood(foods.get(position).getId(), Integer.valueOf(holder.ed_serv_cal.getText().toString()));
                 Toast.makeText(mContext, addedFood.toString(), Toast.LENGTH_SHORT).show();
             }
         });
@@ -121,6 +136,7 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.MyViewHolder> 
                 holder.ed_serv_cal.setVisibility(View.INVISIBLE);
                 holder.btnAdd.setVisibility(View.VISIBLE);
                 holder.btnRemove.setVisibility(View.INVISIBLE);
+                foodI.onAddFood(foods.get(position).getId(), 0);
                 //addedFood.remove(position);
                 Toast.makeText(mContext, addedFood.toString(), Toast.LENGTH_SHORT).show();
             }
@@ -129,7 +145,7 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.MyViewHolder> 
 
     @Override
     public int getItemCount() {
-        return mFoodName.size();
+        return foods.size();
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {

@@ -74,7 +74,7 @@ public class MenuUtama extends AppCompatActivity implements BottomNavigationView
 //            statusBarColor = Color.TRANSPARENT
 //        }
 
-        Toast.makeText(this, getIntent().getExtras().getString("FULLNAME"), Toast.LENGTH_SHORT).show();
+//        Toast.makeText(this, getIntent().getExtras().getString("FULLNAME"), Toast.LENGTH_SHORT).show();
 //        Bundle b2 = new Bundle();
 //        b2.putString("FULLNAME",getIntent().getExtras().toString());
 //        homeFragment.setArguments(b2);

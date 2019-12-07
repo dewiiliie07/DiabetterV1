@@ -8,13 +8,21 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.widget.Button;
 
+import com.example.dewiiliie.diabetter.Interface.FoodInterface;
+import com.example.dewiiliie.diabetter.model.Food;
+
 import java.util.ArrayList;
 
-public class editFoodActivity extends AppCompatActivity {
+public class editFoodActivity extends AppCompatActivity implements FoodInterface {
 
-    private ArrayList<String> mFoodNames = new ArrayList<>();
+    private ArrayList<Food> mFood = new ArrayList<>();
     private ArrayList<String> mCalories = new ArrayList<>();
     private RecyclerView recyclerView;
+
+    @Override
+    public void onAddFood(int foodID, int serving_calories) {
+
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,36 +47,36 @@ public class editFoodActivity extends AppCompatActivity {
     }
 
     private void initFoodList(){
-        mFoodNames.add("Jagung Rebus");
-        mCalories.add("90.2");
-
-        mFoodNames.add("Kentang Rebus");
-        mCalories.add("166");
-
-        mFoodNames.add("Ketan Putih");
-        mCalories.add("217");
-
-        mFoodNames.add("Ketupat");
-        mCalories.add("32");
-
-        mFoodNames.add("Lontong");
-        mCalories.add("38");
-
-        mFoodNames.add("Nasi Putih");
-        mCalories.add("175");
-
-        mFoodNames.add("Bubur");
-        mCalories.add("44");
-
-        mFoodNames.add("Makaroni");
-        mCalories.add("91");
+//        mFoodNames.add("Jagung Rebus");
+//        mCalories.add("90.2");
+//
+//        mFoodNames.add("Kentang Rebus");
+//        mCalories.add("166");
+//
+//        mFoodNames.add("Ketan Putih");
+//        mCalories.add("217");
+//
+//        mFoodNames.add("Ketupat");
+//        mCalories.add("32");
+//
+//        mFoodNames.add("Lontong");
+//        mCalories.add("38");
+//
+//        mFoodNames.add("Nasi Putih");
+//        mCalories.add("175");
+//
+//        mFoodNames.add("Bubur");
+//        mCalories.add("44");
+//
+//        mFoodNames.add("Makaroni");
+//        mCalories.add("91");
 
         initRecycleView();
     }
 
     private void initRecycleView(){
         RecyclerView recyclerView = findViewById(R.id.rv_edit_food);
-        FoodAdapter adapter = new FoodAdapter(this,mFoodNames,mCalories);
+        FoodAdapter adapter = new FoodAdapter(this,mFood,this);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 

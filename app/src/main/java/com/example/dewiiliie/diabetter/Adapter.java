@@ -13,20 +13,36 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.dewiiliie.diabetter.handler.ListConsumption;
+import com.example.dewiiliie.diabetter.model.ConsumeType;
+import com.example.dewiiliie.diabetter.model.Consumption;
+import com.example.dewiiliie.diabetter.rest.ApiClient;
+import com.example.dewiiliie.diabetter.rest.ApiInterface;
+
 import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
 
     private Context mContext;
-    private ArrayList<Model> mList;
+    private ArrayList<ConsumeType> mList;
+    private ApiInterface mApiInterface;
+    private String user_id;
+//    private int count;
+    private ArrayList<ArrayList<Consumption>> consumptions;
+    private ArrayList<Consumption> c;
 
-
-    Adapter(Context context, ArrayList<Model> list){
+    Adapter(Context context, ArrayList<ConsumeType> list,ArrayList<ArrayList<Consumption>> consumptions){
         mContext = context;
         mList = list;
+//        count = i;
+        this.consumptions = consumptions;
     }
 
     @Override
@@ -40,9 +56,9 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
+    public void onBindViewHolder(final ViewHolder holder, final int position) {
 
-        Model foodItem = mList.get(position);
+        final ConsumeType foodItem = mList.get(position);
         ImageView image = holder.iv_base;
         TextView title, addFood, editFood, totalCals;
 
@@ -51,13 +67,16 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
         editFood = holder.tv_editFood;
         totalCals = holder.tv_total_cals;
 
-        image.setImageResource(foodItem.getImage());
+        ArrayList<Consumption> c = new ArrayList<>();
 
-        title.setText(foodItem.getTitle());
+//        image.setImageResource(foodItem.getImage());
+
+        title.setText(foodItem.getConsumetype_name());
         addFood.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(mContext,Menu_makanan.class);
+                intent.putExtra("consumetype_id",position+1);
                 mContext.startActivity(intent);
             }
         });
@@ -71,35 +90,43 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
             }
         });
 
+        for(int i = 0 ; i < consumptions.get(0).size() ; i ++){
+            if ( consumptions.get(0).get(i).getConsumetypeID() ==  Integer.parseInt(mList.get(position).getConsumetype_id())){
+                c.add(consumptions.get(0).get(i));
+            }
+        }
+
+        ArrayList<ChildModel> list = new ArrayList<>(); // ChildModel as ChoosenFood
+//        ArrayList<Consumption> consumptions = new ArrayList<>();
+        ChildModel childModel = null;
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(mContext, LinearLayoutManager.VERTICAL, false);
         holder.rv_FoodChoosen.setLayoutManager(layoutManager);
         holder.rv_FoodChoosen.setHasFixedSize(true);
+        holder.rv_FoodChoosen.setLayoutManager(new LinearLayoutManager(mContext));
+        ChildRecyclerFoodAdapter childRecyclerFoodAdapter = new ChildRecyclerFoodAdapter(c, mContext);
+        holder.rv_FoodChoosen.setAdapter(childRecyclerFoodAdapter);
 
-        ArrayList<ChildModel> list = new ArrayList<>(); // ChildModel as ChoosenFood
-
-        ChildModel childModel = null;
-
-        if(position == 0){ // ChosenFood WHERE consume_type = BREAKFAST
-            //childModel = new ChildModel("Jagung bakar","30","cal");
-            list.add(new ChildModel("Jagung Rebus","10","cal"));
-            list.add(new ChildModel("Jagung Rebusan","12","cal"));
-        }
-        if(position == 1){
-            childModel = new ChildModel("Jagung Rebus","10","cal");
-            list.add(childModel);
-        }
-        if(position == 2){
-            childModel = new ChildModel("Nasi Putih","100","cal");
-            list.add(childModel);
-        }
-        if(position == 3){
-            childModel = new ChildModel("Apel","25","cal");
-            list.add(childModel);
-        }
-        if(position == 4){
-            childModel = new ChildModel("Steak","150","cal");
-            list.add(childModel);
-        }
+//        if(position == 0){ // ChosenFood WHERE consume_type = BREAKFAST
+//            //childModel = new ChildModel("Jagung bakar","30","cal");
+//            list.add(new ChildModel("Jagung Rebus","10","cal"));
+//            list.add(new ChildModel("Jagung Rebusan","12","cal"));
+//        }
+//        if(position == 1){
+//            childModel = new ChildModel("Jagung Rebus","10","cal");
+//            list.add(childModel);
+//        }
+//        if(position == 2){
+//            childModel = new ChildModel("Nasi Putih","100","cal");
+//            list.add(childModel);
+//        }
+//        if(position == 3){
+//            childModel = new ChildModel("Apel","25","cal");
+//            list.add(childModel);
+//        }
+//        if(position == 4){
+//            childModel = new ChildModel("Steak","150","cal");
+//            list.add(childModel);
+//        }
 
         int convertedTotalCals = 0;
         for(ChildModel li : list){
@@ -108,10 +135,6 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
         totalCals.setText(convertedTotalCals+"");
 //        ChildModel childModel = new ChildModel("Jagung bakar","30","cal");
         //list.add(childModel);
-        holder.rv_FoodChoosen.setLayoutManager(new LinearLayoutManager(mContext));
-        ChildRecyclerFoodAdapter childRecyclerFoodAdapter = new ChildRecyclerFoodAdapter(list, mContext);
-        holder.rv_FoodChoosen.setAdapter(childRecyclerFoodAdapter);
-
     }
 
     @Override

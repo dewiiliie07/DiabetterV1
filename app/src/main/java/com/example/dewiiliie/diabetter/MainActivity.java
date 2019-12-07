@@ -64,6 +64,9 @@ public class MainActivity extends AppCompatActivity {
                                 Bundle bundle = new Bundle();
                                 System.out.println("COUNT USER : "+ users.size());
                                 intent.putExtra("user",users);
+
+                                final User user = users.get(0);
+                                Global.user = user;
 //                                Toast.makeText(MainActivity.this, users.get(0).getFull_name(), Toast.LENGTH_SHORT).show();
                                 startActivity(intent);
                             }

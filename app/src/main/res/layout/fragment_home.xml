@@ -10,7 +10,7 @@
     <ImageView
         android:id="@+id/iv_header_menu_utama"
         android:layout_width="match_parent"
-        android:layout_height="204dp"
+        android:layout_height="251dp"
         app:srcCompat="@drawable/bg_header_menu"
         android:scaleType="fitStart"
         android:layout_alignParentTop="true"

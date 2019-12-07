@@ -50,12 +50,6 @@ public class TermCondition extends AppCompatActivity {
             activity_level = (String) savedInstanceState.getSerializable("ACTIVITY_LEVEL");
         }
 
-        Toolbar toolbar = findViewById(R.id.toolbar_term);
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle("DIABETTER");
-        getSupportActionBar().setDisplayShowHomeEnabled(true);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
         btnNext = (Button) findViewById(R.id.btn_next_to_home);
         btnNext.setOnClickListener(new View.OnClickListener() {
             @Override

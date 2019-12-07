@@ -13,14 +13,20 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.dewiiliie.diabetter.handler.GetFoods;
+import com.example.dewiiliie.diabetter.handler.ListConsumeType;
+import com.example.dewiiliie.diabetter.handler.ListConsumption;
 import com.example.dewiiliie.diabetter.handler.UserInformation;
+import com.example.dewiiliie.diabetter.model.ConsumeType;
+import com.example.dewiiliie.diabetter.model.Consumption;
 import com.example.dewiiliie.diabetter.model.Food;
 import com.example.dewiiliie.diabetter.model.User;
 import com.example.dewiiliie.diabetter.rest.ApiClient;
 import com.example.dewiiliie.diabetter.rest.ApiInterface;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -28,6 +34,8 @@ import java.util.List;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+
+import static com.example.dewiiliie.diabetter.Global.user;
 
 
 /**
@@ -44,6 +52,8 @@ public class HomeFragment extends Fragment {
     private String mFullname;
     private float IMT, BBI,KKB, kriteriaBB, aktivitas, hitungUmur;
     private String typeBBI;
+    private ArrayList<ConsumeType> consumeTypes;
+    private int countConsumption;
 
     public HomeFragment() {
         // Required empty public constructor
@@ -54,23 +64,18 @@ public class HomeFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater,@Nullable ViewGroup container,
                             @Nullable Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+        mApiInterface = ApiClient.getClient().create(ApiInterface.class);
 
         v = inflater.inflate(R.layout.fragment_home,container,false);
 
         tv_nama_user = (TextView) v.findViewById(R.id.tv_nama_customer);
         tv_max_calories = (TextView) v.findViewById(R.id.tv_max_calories);
         //Set Username
-        Bundle b3 = getArguments();
-        Bundle extras = getActivity().getIntent().getExtras();
-        ArrayList<User> users  = (ArrayList<User>) extras.getSerializable("user");
-        User user = users.get(0);
-        tv_nama_user.setText(users.get(0).getFull_name());
+
+        tv_nama_user.setText(user.getFull_name());
 
         //Set RV Food
-        recyclerView = (RecyclerView) v.findViewById(R.id.rv_add_food) ;
-        Adapter adapter = new Adapter(getContext(),addFoodList);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity(),LinearLayoutManager.HORIZONTAL,false));
-        recyclerView.setAdapter(adapter);
+
 
         //Set Max Calories
 
@@ -152,6 +157,91 @@ public class HomeFragment extends Fragment {
         float totalKebutuhanKalori;
         totalKebutuhanKalori = KKB + hitungUmur + kriteriaBB + aktivitas;
         tv_max_calories.setText(String.valueOf(totalKebutuhanKalori));
+
+        //Create RecyclerView Foods
+//        Call<ListConsumeType> callConsumeType = mApiInterface.getConsumeType();
+//        callConsumeType.enqueue(new Callback<ListConsumeType>() {
+//            @Override
+//            public void onResponse(Call<ListConsumeType> call, Response<ListConsumeType> response) {
+//                consumeTypes = response.body().getConsumeTypes();
+//                System.out.println("CONSUME TYPE COUNT : "+ consumeTypes.size());
+//                final ArrayList<ArrayList<Consumption>> listConsumptions = new ArrayList<>();
+//                for (int i = 0; i< consumeTypes.size() ; i++) {
+//                    final ApiInterface mApiInterface2 = ApiClient.getClient().create(ApiInterface.class);
+////                    countConsumption = i+1;
+//                    Call<ListConsumption> foodConsumption = mApiInterface2.getConsumption(user.getId(),i+1);
+//                    foodConsumption.enqueue(new Callback<ListConsumption>() {
+//                        @Override
+//                        public void onResponse(Call<ListConsumption> call, Response<ListConsumption> response) {
+//                            ArrayList<Consumption> consumption = response.body().getConsumptions();
+//                            listConsumptions.add(consumption);
+//                            System.out.println("CONSUMPTION : "+ consumption.size());
+//                            recyclerView = (RecyclerView) v.findViewById(R.id.rv_add_food) ;
+//                            Adapter adapter = new Adapter(getContext(),consumeTypes,listConsumptions);
+//                            recyclerView.setLayoutManager(new LinearLayoutManager(getActivity(),LinearLayoutManager.HORIZONTAL,false));
+//                            recyclerView.setAdapter(adapter);
+//                        }
+//
+//                        @Override
+//                        public void onFailure(Call<ListConsumption> call, Throwable t) {
+//                            Toast.makeText(getContext(),"ERROR "+ t.getMessage(),Toast.LENGTH_SHORT).show();
+//                            System.out.println("ERROR " + t.getMessage());
+//                        }
+//                    });
+//                }
+//
+//            }
+//
+//            @Override
+//            public void onFailure(Call<ListConsumeType> call, Throwable t) {
+//
+//            }
+//        });
+
+        //2nd
+        Call<ListConsumeType> callConsumeType = mApiInterface.getConsumeType();
+        callConsumeType.enqueue(new Callback<ListConsumeType>() {
+            @Override
+            public void onResponse(Call<ListConsumeType> call, Response<ListConsumeType> response) {
+                consumeTypes = response.body().getConsumeTypes();
+                System.out.println("CONSUME TYPE COUNT : "+ consumeTypes.size());
+                final ArrayList<ArrayList<Consumption>> listConsumptions = new ArrayList<>();
+                final ApiInterface mApiInterface2 = ApiClient.getClient().create(ApiInterface.class);
+//                    countConsumption = i+1;
+                Call<ListConsumption> foodConsumption = mApiInterface2.getConsumptionByUser(user.getId());
+                foodConsumption.enqueue(new Callback<ListConsumption>() {
+                    @Override
+                    public void onResponse(Call<ListConsumption> call, Response<ListConsumption> response) {
+                        ArrayList<Consumption> consumption = response.body().getConsumptions();
+                        listConsumptions.add(consumption);
+                        System.out.println("CONSUMPTION : "+ consumption.size());
+                        recyclerView = (RecyclerView) v.findViewById(R.id.rv_add_food) ;
+                        Adapter adapter = new Adapter(getContext(),consumeTypes,listConsumptions);
+                        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity(),LinearLayoutManager.HORIZONTAL,false));
+                        recyclerView.setAdapter(adapter);
+                    }
+
+                    @Override
+                    public void onFailure(Call<ListConsumption> call, Throwable t) {
+                        Toast.makeText(getContext(),"ERROR "+ t.getMessage(),Toast.LENGTH_SHORT).show();
+                        System.out.println("ERROR " + t.getMessage());
+                    }
+                });
+
+
+            }
+
+            @Override
+            public void onFailure(Call<ListConsumeType> call, Throwable t) {
+
+            }
+        });
+
+
+
+
+        //Call getFood
+
 
 
         return v;
