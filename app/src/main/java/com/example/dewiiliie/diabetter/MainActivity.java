@@ -1,5 +1,6 @@
 package com.example.dewiiliie.diabetter;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -26,6 +27,7 @@ public class MainActivity extends AppCompatActivity {
     private Button button;
     private TextView tv_register;
     private ApiInterface mApiInterface;
+//    ProgressDialog loading;
     // TODO : install retrofit
     // Install retrofit will be done on partner's computer
     // Already added permission to use internet on this project
@@ -59,6 +61,7 @@ public class MainActivity extends AppCompatActivity {
                             //Toast.makeText(MainActivity.this, response.body().getStatus(), Toast.LENGTH_SHORT).show();
                             String status = response.body().getStatus();
                             if(status.equals("success")){
+//                                loading = ProgressDialog.show( null, "Harap Tunggu...", true, false);
                                 Intent intent = new Intent(MainActivity.this,MenuUtama.class);
                                 ArrayList<User> users = response.body().getUsers();
                                 Bundle bundle = new Bundle();
@@ -69,6 +72,7 @@ public class MainActivity extends AppCompatActivity {
                                 Global.user = user;
 //                                Toast.makeText(MainActivity.this, users.get(0).getFull_name(), Toast.LENGTH_SHORT).show();
                                 startActivity(intent);
+//                                finish();
                             }
                             else{
                                 Toast.makeText(MainActivity.this, "Invalid email/password", Toast.LENGTH_SHORT).show();

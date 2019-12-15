@@ -17,14 +17,15 @@ import android.view.ViewGroup;
  */
 public class SettingFragment extends AppCompatActivity {
 
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fragment_setting);
 
-        Toolbar toolbar = findViewById(R.id.toolbar_food_list);
+        Toolbar toolbar = findViewById(R.id.toolbar_setting);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle("Choose Your Food");
+        getSupportActionBar().setTitle("Setting");
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }

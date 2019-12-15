@@ -8,7 +8,7 @@ public class ApiClient {
 //    public static final String BASE_URL = "http://localhost/diabetter-api/";
 //    public static final String BASE_URL = "http://192.168.43.115/diabetter-api/"; //Tethering HP
 //    public static final String BASE_URL = "http://192.168.0.5/diabetter-api/"; //Wifi Nico
-    public static final String BASE_URL = "http://192.168.1.100/diabetter-api/"; //Wifi kost
+    public static final String BASE_URL = "http://192.168.1.107/diabetter-api/"; //Wifi kost
 
 
 

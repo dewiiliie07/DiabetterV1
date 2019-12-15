@@ -8,7 +8,12 @@ import com.example.dewiiliie.diabetter.handler.RegisterUser;
 import com.example.dewiiliie.diabetter.handler.ResultConsumption;
 import com.example.dewiiliie.diabetter.handler.UserInformation;
 import com.example.dewiiliie.diabetter.model.Consumption;
+import com.example.dewiiliie.diabetter.model.ListQuest;
+import com.example.dewiiliie.diabetter.model.ListQuestCounter;
 import com.example.dewiiliie.diabetter.model.Quest;
+import com.example.dewiiliie.diabetter.model.TotalConsumptionUser;
+
+import java.util.ArrayList;
 
 import retrofit2.Call;
 import retrofit2.http.Field;
@@ -70,4 +75,45 @@ public interface ApiInterface {
     @GET("quest_android")
     Call<Quest> getQuest();
 
+    @GET("user_consumption_android/total_calories_user")
+    Call<TotalConsumptionUser> getTotalCaloriesUser(
+            @Query("user_id") int user_id
+    );
+
+    @GET("Quest_android/quest_by_user")
+    Call<ListQuest> getQuestByUser(
+            @Query("user_id") int user_id
+    );
+
+    @GET("Quest_android/check_user_quest")
+    Call<ListQuestCounter> checkUserQuest(
+            @Query("user_id") int user_id
+    );
+
+
+    @GET("Quest_android/quest")
+    Call<ListQuest> getQuestSpesified(
+            @Query("user_id") int user_id,
+            @Query("quest_id") int quest_id
+    );
+
+    @GET("Quest_android/done_quest")
+    Call<String> setDoneQuest(
+            @Query("user_id") int user_id,
+            @Query("quest_id") int quest_id
+    );
+
+    @GET("user_android/user_add_point")
+    Call<String> addPoint(
+            @Query("user_id") int user_id,
+            @Query("point") int point
+    );
+
+    @GET("User_android/user_last_login")
+    Call<String> lastLogin(
+            @Query("user_id") int user_id
+    );
+
+    @GET("User_android/user_leaderboard")
+    Call<LoginUser> getUsers();
 }

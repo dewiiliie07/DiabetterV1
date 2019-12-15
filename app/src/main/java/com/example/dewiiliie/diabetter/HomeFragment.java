@@ -1,6 +1,7 @@
 package com.example.dewiiliie.diabetter;
 
 
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.BottomNavigationView;
@@ -15,6 +16,7 @@ import android.widget.FrameLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.dewiiliie.diabetter.Interface.FoodInterface;
 import com.example.dewiiliie.diabetter.handler.GetFoods;
 import com.example.dewiiliie.diabetter.handler.ListConsumeType;
 import com.example.dewiiliie.diabetter.handler.ListConsumption;
@@ -22,11 +24,16 @@ import com.example.dewiiliie.diabetter.handler.UserInformation;
 import com.example.dewiiliie.diabetter.model.ConsumeType;
 import com.example.dewiiliie.diabetter.model.Consumption;
 import com.example.dewiiliie.diabetter.model.Food;
+import com.example.dewiiliie.diabetter.model.ListQuest;
+import com.example.dewiiliie.diabetter.model.ListQuestCounter;
+import com.example.dewiiliie.diabetter.model.Quest;
+import com.example.dewiiliie.diabetter.model.TotalConsumptionUser;
 import com.example.dewiiliie.diabetter.model.User;
 import com.example.dewiiliie.diabetter.rest.ApiClient;
 import com.example.dewiiliie.diabetter.rest.ApiInterface;
 
 import java.lang.reflect.Array;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -41,11 +48,11 @@ import static com.example.dewiiliie.diabetter.Global.user;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class HomeFragment extends Fragment {
+public class HomeFragment extends Fragment implements FoodInterface {
 
 
     View v;
-    private TextView tv_nama_user,tv_max_calories;
+    private TextView tv_nama_user,tv_max_calories, tv_jumlah_calories;
     private RecyclerView recyclerView;
     private ArrayList<Model> addFoodList;
     private ApiInterface mApiInterface;
@@ -54,6 +61,8 @@ public class HomeFragment extends Fragment {
     private String typeBBI;
     private ArrayList<ConsumeType> consumeTypes;
     private int countConsumption;
+    private static DecimalFormat df2 = new DecimalFormat("#.##");
+    private FoodInterface foodInterface;
 
     public HomeFragment() {
         // Required empty public constructor
@@ -66,15 +75,36 @@ public class HomeFragment extends Fragment {
         // Inflate the layout for this fragment
         mApiInterface = ApiClient.getClient().create(ApiInterface.class);
 
+        foodInterface = this;
+        Global.totalCalories = 0;
+
+//        checkQuest();
+
         v = inflater.inflate(R.layout.fragment_home,container,false);
 
         tv_nama_user = (TextView) v.findViewById(R.id.tv_nama_customer);
         tv_max_calories = (TextView) v.findViewById(R.id.tv_max_calories);
+        tv_jumlah_calories = (TextView) v.findViewById(R.id.tv_jumlah_calories);
         //Set Username
 
         tv_nama_user.setText(user.getFull_name());
 
-        //Set RV Food
+        //Set TotalCalory
+        Call<TotalConsumptionUser> totalCalories = mApiInterface.getTotalCaloriesUser(user.getUser_id());
+        totalCalories.enqueue(new Callback<TotalConsumptionUser>() {
+            @Override
+            public void onResponse(Call<TotalConsumptionUser> call, Response<TotalConsumptionUser> response) {
+                TotalConsumptionUser total = response.body();
+                tv_jumlah_calories.setText(String.valueOf(df2.format(total.caloriesTotal())));
+            }
+
+            @Override
+            public void onFailure(Call<TotalConsumptionUser> call, Throwable t) {
+                Toast.makeText(getContext(),"Error : " + t.getMessage().toString(), Toast.LENGTH_SHORT).show();
+                System.out.println("Error : " + t.getMessage().toString());
+            }
+        });
+
 
 
         //Set Max Calories
@@ -208,7 +238,7 @@ public class HomeFragment extends Fragment {
                 final ArrayList<ArrayList<Consumption>> listConsumptions = new ArrayList<>();
                 final ApiInterface mApiInterface2 = ApiClient.getClient().create(ApiInterface.class);
 //                    countConsumption = i+1;
-                Call<ListConsumption> foodConsumption = mApiInterface2.getConsumptionByUser(user.getId());
+                Call<ListConsumption> foodConsumption = mApiInterface2.getConsumptionByUser(user.getUser_id());
                 foodConsumption.enqueue(new Callback<ListConsumption>() {
                     @Override
                     public void onResponse(Call<ListConsumption> call, Response<ListConsumption> response) {
@@ -216,7 +246,7 @@ public class HomeFragment extends Fragment {
                         listConsumptions.add(consumption);
                         System.out.println("CONSUMPTION : "+ consumption.size());
                         recyclerView = (RecyclerView) v.findViewById(R.id.rv_add_food) ;
-                        Adapter adapter = new Adapter(getContext(),consumeTypes,listConsumptions);
+                        Adapter adapter = new Adapter(getContext(),consumeTypes,listConsumptions, foodInterface);
                         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity(),LinearLayoutManager.HORIZONTAL,false));
                         recyclerView.setAdapter(adapter);
                     }
@@ -227,8 +257,6 @@ public class HomeFragment extends Fragment {
                         System.out.println("ERROR " + t.getMessage());
                     }
                 });
-
-
             }
 
             @Override
@@ -236,14 +264,7 @@ public class HomeFragment extends Fragment {
 
             }
         });
-
-
-
-
         //Call getFood
-
-
-
         return v;
     }
 
@@ -260,5 +281,21 @@ public class HomeFragment extends Fragment {
         addFoodList.add(new Model(R.drawable.base_add_food,"Today's Dinner","Add Food","edit text"));
 
     }
+
+    @Override
+    public void onAddFood(int foodID, int serving_calories) {
+
+    }
+
+    @Override
+    public void onAddCalories(double calories) {
+
+    }
+
+    @Override
+    public void totalCalories(double totalCalory) {
+//        tv_jumlah_calories.setText(String.valueOf(df2.format(totalCalory)));
+    }
+
 
 }

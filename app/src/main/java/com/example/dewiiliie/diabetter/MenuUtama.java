@@ -6,6 +6,7 @@ import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.graphics.Color;
 import android.media.session.MediaSession;
+import android.os.AsyncTask;
 import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.design.internal.BottomNavigationMenu;
@@ -27,10 +28,22 @@ import android.widget.FrameLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.dewiiliie.diabetter.model.ListQuest;
+import com.example.dewiiliie.diabetter.model.ListQuestCounter;
+import com.example.dewiiliie.diabetter.model.Quest;
 import com.jaeger.library.StatusBarUtil;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class MenuUtama extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener{
 
@@ -58,6 +71,9 @@ public class MenuUtama extends AppCompatActivity implements BottomNavigationView
         super.onCreate(savedInstanceState);
         setContentView(R.layout.menu_utama);
 
+        checkQuest();
+
+
 //        if(savedInstanceState == null){
 //            Bundle extras = getIntent().getExtras();
 //            if(extras != null){
@@ -78,6 +94,7 @@ public class MenuUtama extends AppCompatActivity implements BottomNavigationView
 //        Bundle b2 = new Bundle();
 //        b2.putString("FULLNAME",getIntent().getExtras().toString());
 //        homeFragment.setArguments(b2);
+
 
         if (Build.VERSION.SDK_INT >= 19 && Build.VERSION.SDK_INT < 21) {
             setWindowFlag(this, WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS, true);
@@ -123,6 +140,162 @@ public class MenuUtama extends AppCompatActivity implements BottomNavigationView
         }
         return false;
 
+    }
+
+    private void checkQuest(){
+        new Connection().execute();
+    }
+
+    public class Connection extends AsyncTask<Void,Void,Void> {
+        @Override
+        protected Void doInBackground(Void... voids) {
+            String[] s = Global.user.getLast_login().split("-");
+//            System.out.println("Tahun : " + s[0] + " Bulan : " + s[1] + " Hari : " + s[2]);
+            DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+            Date date = new Date();
+            System.out.println(dateFormat.format(date));
+            String[] s2 = String.valueOf(dateFormat.format(date)).split("-");
+            if((Integer.parseInt(s2[2]) - Integer.parseInt(s[2])) > 0)
+            {
+                System.out.println("LOGIN KEMARIN");
+                System.out.println("HASIL : " + (Integer.parseInt(s2[2]) - Integer.parseInt(s[2])));
+                Call<String> lastLogin = Global.mApi.lastLogin(Global.user.getUser_id());
+                try{
+                    lastLogin.execute();
+                }catch (Exception ex){
+                    ex.printStackTrace();
+                }
+            }
+
+            Call<ListQuestCounter> listQuestCounterCall = Global.mApi.checkUserQuest(Global.user.getUser_id());
+            try {
+//            ListQuestCounter listQuestCounter = listQuestCounterCall.execute().body();
+                int counter = 0;
+                ListQuestCounter lqc = listQuestCounterCall.execute().body();
+                setQuestAndPoint(1);
+                setQuestAndPoint(9);
+                if (lqc.getCounter_add_food(0)>0 && lqc.getConsumetype_id(0)==1){
+                    setQuestAndPoint(2);
+                    counter++;
+                }
+                if (lqc.getCounter_add_food(1)>0 && lqc.getConsumetype_id(1)==2){
+                    setQuestAndPoint(3);
+                    counter++;
+
+                }
+                if (lqc.getCounter_add_food(2)>0 && lqc.getConsumetype_id(2)==3){
+                    setQuestAndPoint(4);
+                    counter++;
+                }
+                if (lqc.getCounter_add_food(3)>0 && lqc.getConsumetype_id(3)==4){
+                    setQuestAndPoint(5);
+                    counter++;
+                }
+                if (lqc.getCounter_add_food(4)>0 && lqc.getConsumetype_id(4)==5){
+                    setQuestAndPoint(6);
+                    counter++;
+                }
+                if (counter>=3){
+                    setQuestAndPoint(7);
+                }
+                if (counter>=5){
+                    setQuestAndPoint(8);
+                }
+                if (counter>=8){
+                    setQuestAndPoint(11);
+                }
+                if (Global.user.getCounter_login() >= 3){
+                    setQuestAndPoint(10);
+                }
+                if (Global.user.getCounter_daily_quest() >=20){
+                    setQuestAndPoint(12);
+                }
+                if (Global.user.getCounter_daily_quest() >=40){
+                    setQuestAndPoint(13);
+                }
+                if (Global.user.getCounter_daily_quest() >=80){
+                    setQuestAndPoint(14);
+                }
+                if (Global.user.getPoints() >= 30){
+                    setQuestAndPoint(15);
+                }
+                if (Global.user.getPoints() >= 70){
+                    setQuestAndPoint(16);
+                }
+                if (Global.user.getPoints() >= 250){
+                    setQuestAndPoint(17);
+                }
+                if (Global.user.getPoints() >= 500){
+                    setQuestAndPoint(15);
+                }
+            }
+            catch (Exception ex){
+                ex.printStackTrace();
+                System.out.println("ERROR : " + ex.getMessage().toString());
+            }
+
+
+
+
+
+            return null;
+        }
+    }
+
+    void setQuestAndPoint(final int questID){
+        Call<ListQuest> questCall = Global.mApi.getQuestSpesified(Global.user.getUser_id(),questID);
+        questCall.enqueue(new Callback<ListQuest>() {
+            @Override
+            public void onResponse(Call<ListQuest> call, Response<ListQuest> response) {
+//                Toast.makeText(getBaseContext(), "BERHASIL BUKA QUEST : " + response.body().getQuestList().get(0).getQuest_name(), Toast.LENGTH_SHORT).show();
+                final Quest listQuests = response.body().getQuestList().get(0);
+                if (response.body().getQuestList().get(0).getIsDone() != 1) {
+                    Call<String> doneCall = Global.mApi.setDoneQuest(Global.user.getUser_id(), questID);
+                    doneCall.enqueue(new Callback<String>() {
+                        @Override
+                        public void onResponse(Call<String> call, Response<String> response) {
+                            if (response.isSuccessful()) {
+                                Toast.makeText(getBaseContext(), "Done Quest ID " + questID, Toast.LENGTH_SHORT).show();
+                                System.out.println("Done Quest ID " + questID);
+                                Call<String> addPointCall = Global.mApi.addPoint(Global.user.getUser_id(), listQuests.getQuest_point());
+                                addPointCall.enqueue(new Callback<String>() {
+                                    @Override
+                                    public void onResponse(Call<String> call, Response<String> response) {
+
+                                        if (response.isSuccessful()) {
+                                            Toast.makeText(getBaseContext(), "Added Point", Toast.LENGTH_SHORT).show();
+
+                                        } else {
+                                            Toast.makeText(getBaseContext(), "FAILED " + response.errorBody(), Toast.LENGTH_SHORT).show();
+                                        }
+                                    }
+
+                                    @Override
+                                    public void onFailure(Call<String> call, Throwable t) {
+                                        Toast.makeText(getBaseContext(), "Failed to add point", Toast.LENGTH_SHORT).show();
+                                    }
+                                });
+                            } else {
+                                Toast.makeText(getBaseContext(), "FAILED " + response.errorBody(), Toast.LENGTH_SHORT).show();
+                            }
+
+                        }
+
+                        @Override
+                        public void onFailure(Call<String> call, Throwable t) {
+                            Toast.makeText(getBaseContext(), "Failed Quest ID 2", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ListQuest> call, Throwable t) {
+                Toast.makeText(getBaseContext(), "ERROR : " + t.getMessage(), Toast.LENGTH_SHORT).show();
+                System.out.println("ERROR : " + t.getMessage().toString());
+            }
+        });
     }
 
     @Override

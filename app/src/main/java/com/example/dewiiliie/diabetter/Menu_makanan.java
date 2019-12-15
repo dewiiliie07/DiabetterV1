@@ -75,6 +75,7 @@ public class Menu_makanan extends AppCompatActivity implements FoodInterface {
             public void onClick(View view) {
 //                FoodAdapter.getFood();
                 //FoodAdapter.addedFood;
+                Global.totalCalories = 0;
 
 //                Intent intent = new Intent(getApplicationContext(), MenuUtama.class);
 //                startActivity(intent);
@@ -82,7 +83,7 @@ public class Menu_makanan extends AppCompatActivity implements FoodInterface {
                     final int count= i;
                     if (foodconsumeds[i] != 0 && consumetype_id !=890321){
 
-                        Call<ResultConsumption> foodAdd =  mApiInterface.addConsumption(Global.user.getId(),consumetype_id,foodconsumeds[i],i);
+                        Call<ResultConsumption> foodAdd =  mApiInterface.addConsumption(Global.user.getUser_id(),consumetype_id,foodconsumeds[i],i);
                         foodAdd.enqueue(new Callback<ResultConsumption>() {
                             @Override
                             public void onResponse(Call<ResultConsumption> call, Response<ResultConsumption> response) {
@@ -154,9 +155,21 @@ public class Menu_makanan extends AppCompatActivity implements FoodInterface {
     @Override
     public void onAddFood(int foodID, int serving_calories) {
         foodconsumeds[foodID] = serving_calories;
+
         System.out.println("CALORIES : "+foodconsumeds[foodID] + " DARI FOOD ID : " + foodID);
 //        foodConsumeds.get(foodID).setConsumetype_id(consumetypeID);
 //        foodConsumeds.get(foodID).setServing_calories(serving_calories);
 //        foodConsumeds.get(foodID).setConsumetype_id();
     }
+
+    @Override
+    public void onAddCalories(double calories) {
+
+    }
+
+    @Override
+    public void totalCalories(double totalCalory) {
+
+    }
+
 }

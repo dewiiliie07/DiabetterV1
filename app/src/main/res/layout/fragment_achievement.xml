@@ -66,7 +66,7 @@
                         android:layout_width="50dp"
                         android:layout_height="50dp"
                         android:id="@+id/badge1"
-                        android:src="@drawable/badge1"
+                        android:src="@drawable/badge_grey"
                         android:layout_weight="1"
                         android:layout_gravity="fill_horizontal"
                         />
@@ -74,14 +74,14 @@
                         android:layout_width="50dp"
                         android:layout_height="50dp"
                         android:id="@+id/badge2"
-                        android:src="@drawable/badge1"
+                        android:src="@drawable/badge_grey"
                         android:layout_weight="1"
                         />
                     <ImageView
                         android:layout_width="50dp"
                         android:layout_height="50dp"
                         android:id="@+id/badge3"
-                        android:src="@drawable/badge1"
+                        android:src="@drawable/badge_grey"
                         android:layout_weight="1"
                         />
                 </TableRow>
@@ -91,21 +91,21 @@
                         android:layout_width="50dp"
                         android:layout_height="50dp"
                         android:id="@+id/badge4"
-                        android:src="@drawable/badge1"
+                        android:src="@drawable/badge_grey"
                         android:layout_weight="1"
                         />
                     <ImageView
                         android:layout_width="50dp"
                         android:layout_height="50dp"
                         android:id="@+id/badge5"
-                        android:src="@drawable/badge1"
+                        android:src="@drawable/badge_grey"
                         android:layout_weight="1"
                         />
                     <ImageView
                         android:layout_width="50dp"
                         android:layout_height="50dp"
                         android:id="@+id/badge6"
-                        android:src="@drawable/badge1"
+                        android:src="@drawable/badge_grey"
                         android:layout_weight="1"
                         />
                 </TableRow>
@@ -114,21 +114,21 @@
                         android:layout_width="50dp"
                         android:layout_height="50dp"
                         android:id="@+id/badge7"
-                        android:src="@drawable/badge1"
+                        android:src="@drawable/badge_grey"
                         android:layout_weight="1"
                         />
                     <ImageView
                         android:layout_width="50dp"
                         android:layout_height="50dp"
                         android:id="@+id/badge8"
-                        android:src="@drawable/badge1"
+                        android:src="@drawable/badge_grey"
                         android:layout_weight="1"
                         />
                     <ImageView
                         android:layout_width="50dp"
                         android:layout_height="50dp"
                         android:id="@+id/badge9"
-                        android:src="@drawable/badge1"
+                        android:src="@drawable/badge_grey"
                         android:layout_weight="1"
                         />
                 </TableRow>
@@ -137,31 +137,29 @@
                         android:layout_width="50dp"
                         android:layout_height="50dp"
                         android:id="@+id/badge10"
-                        android:src="@drawable/badge1"
+                        android:src="@drawable/badge_grey"
                         android:layout_weight="1"
                         />
                     <ImageView
                         android:layout_width="50dp"
                         android:layout_height="50dp"
                         android:id="@+id/badge11"
-                        android:src="@drawable/badge1"
+                        android:src="@drawable/badge_grey"
                         android:layout_weight="1"
                         />
                     <ImageView
                         android:layout_width="50dp"
                         android:layout_height="50dp"
                         android:id="@+id/badge12"
-                        android:src="@drawable/badge1"
+                        android:src="@drawable/badge_grey"
                         android:layout_weight="1"
                         />
+
                 </TableRow>
-
-
 
             </TableLayout>
 
         </ScrollView>
-
 
     </RelativeLayout>
 

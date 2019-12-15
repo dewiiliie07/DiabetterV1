@@ -13,6 +13,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.dewiiliie.diabetter.Interface.FoodInterface;
 import com.example.dewiiliie.diabetter.handler.ListConsumption;
 import com.example.dewiiliie.diabetter.model.ConsumeType;
 import com.example.dewiiliie.diabetter.model.Consumption;
@@ -21,6 +22,7 @@ import com.example.dewiiliie.diabetter.rest.ApiInterface;
 
 import org.w3c.dom.Text;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,7 +30,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
+public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> implements FoodInterface {
 
     private Context mContext;
     private ArrayList<ConsumeType> mList;
@@ -37,12 +39,18 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
 //    private int count;
     private ArrayList<ArrayList<Consumption>> consumptions;
     private ArrayList<Consumption> c;
+    private TextView title, addFood, editFood, totalCals;
+    private double totalCal;
+    private FoodInterface foodInterface;
+    private static DecimalFormat df2 = new DecimalFormat("#.##");
 
-    Adapter(Context context, ArrayList<ConsumeType> list,ArrayList<ArrayList<Consumption>> consumptions){
+
+    Adapter(Context context, ArrayList<ConsumeType> list,ArrayList<ArrayList<Consumption>> consumptions, FoodInterface foodInterface){
         mContext = context;
         mList = list;
 //        count = i;
         this.consumptions = consumptions;
+        this.foodInterface = foodInterface;
     }
 
     @Override
@@ -60,7 +68,8 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
 
         final ConsumeType foodItem = mList.get(position);
         ImageView image = holder.iv_base;
-        TextView title, addFood, editFood, totalCals;
+        totalCal = 0;
+
 
         title = holder.tv_title;
         addFood = holder.tv_addFood;
@@ -84,9 +93,12 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
         editFood.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Intent i = new Intent(mContext,editFoodActivity.class);
+                mContext.startActivity(i);
+
                 //Intent intent = new Intent(mContext,editFoodActivity.class);
                 //mContext.startActivity(intent);
-                Toast.makeText(mContext, "This feature is unused", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(mContext, "This feature is unused", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -103,7 +115,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
         holder.rv_FoodChoosen.setLayoutManager(layoutManager);
         holder.rv_FoodChoosen.setHasFixedSize(true);
         holder.rv_FoodChoosen.setLayoutManager(new LinearLayoutManager(mContext));
-        ChildRecyclerFoodAdapter childRecyclerFoodAdapter = new ChildRecyclerFoodAdapter(c, mContext);
+        ChildRecyclerFoodAdapter childRecyclerFoodAdapter = new ChildRecyclerFoodAdapter(c, mContext,this);
         holder.rv_FoodChoosen.setAdapter(childRecyclerFoodAdapter);
 
 //        if(position == 0){ // ChosenFood WHERE consume_type = BREAKFAST
@@ -140,6 +152,25 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
     @Override
     public int getItemCount() {
         return  mList.size();
+    }
+
+    @Override
+    public void onAddFood(int foodID, int serving_calories) {
+
+    }
+
+    @Override
+    public void onAddCalories(double calories) {
+        totalCal += calories;
+        totalCals.setText(String.valueOf(df2.format(totalCal)));
+        Global.totalCalories += calories;
+        foodInterface.totalCalories(Global.totalCalories);
+
+    }
+
+    @Override
+    public void totalCalories(double totalCalory) {
+
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder{

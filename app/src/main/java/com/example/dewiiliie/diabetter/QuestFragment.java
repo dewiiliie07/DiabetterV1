@@ -1,8 +1,10 @@
 package com.example.dewiiliie.diabetter;
 
 
+import android.app.ActionBar;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.TabItem;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -10,6 +12,7 @@ import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,8 +26,12 @@ public class QuestFragment extends Fragment {
 
     View v;
 
+    Toolbar toolbar;
     ViewPager viewPager;
     TabLayout tabLayout;
+    TabItem tabDaily;
+    TabItem tabMain;
+    QuestPagerAdaptor questPagerAdaptor;
 
 
     @Override
@@ -32,16 +39,17 @@ public class QuestFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         v = inflater.inflate(R.layout.fragment_quest, container, false);
-
-//        setupViewPager(viewPager);
-
 //      TAB LAYOUT
         tabLayout = v.findViewById(R.id.tab_quest);
-        tabLayout.addTab(tabLayout.newTab().setText("Daily Quest"));
-        tabLayout.addTab(tabLayout.newTab().setText("Main Quest"));
-
         //VIEW PAGER
         viewPager = v.findViewById(R.id.vp_quest);
+
+//        questPagerAdaptor = new QuestPagerAdaptor(getChildFragmentManager(),tabLayout.getTabCount());
+//        viewPager.setAdapter(questPagerAdaptor);
+//        viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
+
+
+
 //        QuestPagerAdaptor adapter = new QuestPagerAdaptor(getFragmentManager());
 //        adapter.addFragment(new DailyQuestFragment(),"One");
 //        adapter.addFragment(new MainQuestFragment(),"Two");
@@ -71,11 +79,10 @@ public class QuestFragment extends Fragment {
     }
 
     @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState){
-
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        setupViewPager(viewPager);
+        setUpViewPager(viewPager);
         tabLayout.setupWithViewPager(viewPager);
 
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
@@ -96,12 +103,12 @@ public class QuestFragment extends Fragment {
         });
     }
 
-    private void setupViewPager(ViewPager viewPager) {
+    private void setUpViewPager(ViewPager viewPager) {
         QuestPagerAdaptor adapter = new QuestPagerAdaptor(getChildFragmentManager());
-        adapter.addFragment(new DailyQuestFragment(),"Daily");
+
+        adapter.addFragment(new DailyQuestFragment(),"daily");
         adapter.addFragment(new MainQuestFragment(),"Main");
+
         viewPager.setAdapter(adapter);
-     }
-
-
+    }
 }

@@ -25,6 +25,16 @@ public class editFoodActivity extends AppCompatActivity implements FoodInterface
     }
 
     @Override
+    public void onAddCalories(double calories) {
+
+    }
+
+    @Override
+    public void totalCalories(double totalCalory) {
+
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_food);

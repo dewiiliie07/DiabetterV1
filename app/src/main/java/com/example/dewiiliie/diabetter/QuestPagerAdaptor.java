@@ -9,39 +9,42 @@ import android.support.v4.app.FragmentStatePagerAdapter;
 import java.util.ArrayList;
 import java.util.List;
 
-public class QuestPagerAdaptor extends FragmentStatePagerAdapter {
-    int mCountTab;
+public class QuestPagerAdaptor extends FragmentPagerAdapter {
+//    int mCountTab;
 
-    private final ArrayList<Fragment> fragmentsList = new ArrayList<>();
-    private final ArrayList<String> fragmentTitle = new ArrayList<>();
+    private List<Fragment> fragmentsList = new ArrayList<>();
+    private List<String> fragmentTitle = new ArrayList<>();
 //    private List<Fragment> fragmentList = new ArrayList<>();
 //    private List<String> titleList = new ArrayList<>();
 
     public QuestPagerAdaptor(FragmentManager fm){
         super(fm);
+//        this.mCountTab = CountTab;
     }
 
     @Override
     public Fragment getItem(int position) {
 
-//        Fragment fragment = null;
-//
+        return fragmentsList.get(position);
 //        switch (position){
-//
 //            case 0 :
-//                fragment  = new DailyQuestFragment();
-//                break;
+//                return new DailyQuestFragment();
+////                DailyQuestFragment tabOne  = new DailyQuestFragment();
+////                return tabOne;
 //
 //            case 1 :
-//                MainQuestFragment tabTwo = new MainQuestFragment();
-//                return tabTwo;
+//                return new MainQuestFragment();
+////                MainQuestFragment tabTwo = new MainQuestFragment();
+////                return tabTwo;
+//
+//            default:
+//                return null;
 //        }
-
-        return fragmentsList.get(position);
     }
 
     @Override
     public int getCount() {
+//        return mCountTab;
         return fragmentsList.size();
     }
 

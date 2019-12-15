@@ -38,14 +38,14 @@ public class ProfileFragment extends Fragment implements View.OnClickListener{
         v = inflater.inflate(R.layout.fragment_profile,container,false);
 
         Button btnAcv = (Button) v.findViewById(R.id.btn_acv);
-        Button btnNotif = (Button) v.findViewById(R.id.btn_notif);
-        Button btnSetting = (Button) v.findViewById(R.id.btn_setting);
+//        Button btnNotif = (Button) v.findViewById(R.id.btn_notif);
+//        Button btnSetting = (Button) v.findViewById(R.id.btn_setting);
         Button btnHelp = (Button) v.findViewById(R.id.btn_help);
         Button btnCredit = (Button) v.findViewById(R.id.btn_credit);
 
         btnAcv.setOnClickListener(this);
-        btnNotif.setOnClickListener(this);
-        btnSetting.setOnClickListener(this);
+//        btnNotif.setOnClickListener(this);
+//        btnSetting.setOnClickListener(this);
         btnHelp.setOnClickListener(this);
         btnCredit.setOnClickListener(this);
 
@@ -63,12 +63,12 @@ public class ProfileFragment extends Fragment implements View.OnClickListener{
                 frAcv.replace(R.id.main_frame, achievementFragment);
                 frAcv.commit();
                 break;
-            case R.id.btn_notif :
-                NotificationFragment notificationFragment = new NotificationFragment();
-                FragmentTransaction frNotif = getFragmentManager().beginTransaction();
-                frNotif.replace(R.id.main_frame, notificationFragment);
-                frNotif.commit();
-                break;
+//            case R.id.btn_notif :
+//                NotificationFragment notificationFragment = new NotificationFragment();
+//                FragmentTransaction frNotif = getFragmentManager().beginTransaction();
+//                frNotif.replace(R.id.main_frame, notificationFragment);
+//                frNotif.commit();
+//                break;
 //            case R.id.btn_setting :
 //                SettingFragment settingFrgment = new SettingFragment();
 //                FragmentTransaction frSetting = getFragmentManager().beginTransaction();
@@ -76,9 +76,9 @@ public class ProfileFragment extends Fragment implements View.OnClickListener{
 //                frSetting.commit();
 //                break;
 //            case R.id.btn_setting :
-//                SettingFragment settingFrgment = new SettingFragment();
+//                SettingFragment settingFragment = new SettingFragment();
 //                FragmentTransaction frSetting = getFragmentManager().beginTransaction();
-//                frSetting.replace(R.id.main_frame, settingFrgment);
+//                frSetting.replace(R.id.main_frame,settingFragment);
 //                frSetting.commit();
 //                break;
 //                Intent in = new Intent(getActivity(),SettingActivity.class);

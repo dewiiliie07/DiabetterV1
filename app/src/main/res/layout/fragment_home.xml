@@ -31,7 +31,7 @@
             android:layout_height="wrap_content"
             android:paddingTop="16dp"
             android:paddingRight="32dp"
-            android:paddingLeft="32dp"
+            android:paddingLeft="20dp"
             android:paddingBottom="16dp"
             android:id="@+id/rl_header">
             <!--<ImageView-->
@@ -42,36 +42,46 @@
             <!--app:srcCompat="@drawable/base_menu_header" />-->
 
             <TextView
+                android:layout_marginTop="10dp"
                 android:id="@+id/tv_nama_customer"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="48px"
-                android:layout_marginBottom="4dp"
+                android:textSize="24sp"
+                android:fontFamily="@font/montserrat_bold"
+                android:textColor="@color/colorBlack"
                 android:text="Ms.Dewi Lie" />
-            <TextView
-                android:id="@+id/tv_tanggal_sekarang"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/tv_nama_customer"
-                android:layout_alignStart="@+id/tv_nama_customer"
-                android:layout_marginBottom="16dp"
-                android:text="29 Agustus 2019" />
+<!--            <TextView-->
+<!--                android:id="@+id/tv_tanggal_sekarang"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_below="@id/tv_nama_customer"-->
+<!--                android:layout_alignStart="@+id/tv_nama_customer"-->
+<!--                android:layout_marginBottom="16dp"-->
+<!--                android:text="29 Agustus 2019" />-->
 
             <ImageView
                 android:id="@+id/iv_logo_burning"
-                android:layout_width="45dp"
-                android:layout_height="45dp"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginTop="15dp"
                 android:layout_alignStart="@+id/tv_nama_customer"
-                android:layout_below="@id/tv_tanggal_sekarang"
+                android:layout_below="@id/tv_nama_customer"
                 app:srcCompat="@drawable/calories_icon" />
+<!--            <ProgressBar-->
+<!--                android:layout_marginTop="20dp"-->
+<!--                android:layout_below="@+id/tv_nama_customer"-->
+<!--                android:id="@+id/pb_calories"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"/>-->
 
             <TextView
                 android:id="@+id/tv_tulisan_calories_aja"
                 android:layout_marginLeft="8dp"
+                android:layout_marginTop="15dp"
                 android:layout_width="wrap_content"
-                android:layout_below="@id/tv_tanggal_sekarang"
+                android:layout_below="@id/tv_nama_customer"
                 android:layout_height="wrap_content"
-                android:textSize="20dp"
+                android:textSize="18sp"
                 android:layout_toRightOf="@id/iv_logo_burning"
                 android:textStyle="bold"
                 android:text="Calories" />
@@ -85,15 +95,18 @@
                 android:layout_below="@id/tv_tulisan_calories_aja"
                 >
                 <TextView
+                    android:textColor="@color/colorBlack"
                     android:id="@+id/tv_jumlah_calories"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="0" />
                 <TextView
+                    android:textColor="@color/colorBlack"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="/" />
                 <TextView
+                    android:textColor="@color/colorBlack"
                     android:id="@+id/tv_max_calories"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -101,15 +114,22 @@
 
             </LinearLayout>
 
+            <ImageView
+                android:layout_marginTop="30dp"
+                android:layout_alignParentRight="true"
+                android:layout_width="60dp"
+                android:layout_height="50dp"
+                android:src="@drawable/indicator_ok"/>
 
-            <ProgressBar
-                android:id="@+id/progressBar"
-                style="?android:attr/progressBarStyleHorizontal"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/ll_jumlah_calories"
-                android:layout_alignStart="@+id/tv_nama_customer"
-                android:layout_marginBottom="18dp" />
+
+            <!--            <ProgressBar-->
+<!--                android:id="@+id/progressBar"-->
+<!--                style="?android:attr/progressBarStyleHorizontal"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_below="@+id/ll_jumlah_calories"-->
+<!--                android:layout_alignStart="@+id/tv_nama_customer"-->
+<!--                android:layout_marginBottom="18dp" />-->
 
 
         </RelativeLayout>

@@ -7,8 +7,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.example.dewiiliie.diabetter.Interface.FoodInterface;
 import com.example.dewiiliie.diabetter.model.Consumption;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,11 +20,15 @@ public class ChildRecyclerFoodAdapter extends RecyclerView.Adapter<ChildRecycler
     private Context mContext;
     private LayoutInflater layoutInflater;
     private int consumetypeID;
+    private FoodInterface foodInterface;
+    private static DecimalFormat df2 = new DecimalFormat("#.##");
 
-    public ChildRecyclerFoodAdapter(ArrayList<Consumption> childModels, Context mContext) {
+
+    public ChildRecyclerFoodAdapter(ArrayList<Consumption> childModels, Context mContext, FoodInterface foodInterface) {
         this.childModels = childModels;
         this.mContext = mContext;
         this.layoutInflater=LayoutInflater.from(mContext);
+        this.foodInterface = foodInterface;
     }
 
     @Override
@@ -36,8 +42,9 @@ public class ChildRecyclerFoodAdapter extends RecyclerView.Adapter<ChildRecycler
         Consumption model = childModels.get(position);
         holder.tvFoodChoosenChild.setText(model.getFoodname());
         holder.tvCaloriesChoosen.setText(String.valueOf(model.getServing_calory()));
-        int calory_total = (int)model.getCalories()/model.getServing_calory() * model.getServing_calories();
-        holder.tvCal.setText(String.valueOf(calory_total));
+        double calory_total = (double)model.getCalories()/model.getServing_calory() * model.getServing_calories();
+        foodInterface.onAddCalories(calory_total);
+        holder.tvCal.setText(String.valueOf(df2.format(calory_total)));
     }
 
     @Override
