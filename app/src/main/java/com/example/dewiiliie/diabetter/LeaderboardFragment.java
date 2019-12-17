@@ -38,6 +38,12 @@ public class LeaderboardFragment extends Fragment {
         final TextView rank1 = (TextView) v.findViewById(R.id.name_1);
         final TextView rank2 = (TextView) v.findViewById(R.id.name_2);
         final TextView rank3 = (TextView) v.findViewById(R.id.name_3);
+        final TextView point1 = (TextView) v.findViewById(R.id.txt_point);
+        final TextView point2 = (TextView) v.findViewById(R.id.txt_point2);
+        final TextView point3 = (TextView) v.findViewById(R.id.txt_point3);
+        final TextView level1 = (TextView) v.findViewById(R.id.level_leaderboard1);
+        final TextView level2 = (TextView) v.findViewById(R.id.level_leaderboard2);
+        final TextView level3 = (TextView) v.findViewById(R.id.level_leaderboard3);
 
         Call<LoginUser> loginUserCall = Global.mApi.getUsers();
         loginUserCall.enqueue(new Callback<LoginUser>() {
@@ -47,6 +53,12 @@ public class LeaderboardFragment extends Fragment {
                 rank1.setText(users.get(0).getFull_name());
                 rank2.setText(users.get(1).getFull_name());
                 rank3.setText(users.get(2).getFull_name());
+                point1.setText(String.valueOf(users.get(0).getPoints()));
+                point2.setText(String.valueOf(users.get(1).getPoints()));
+                point3.setText(String.valueOf(users.get(2).getPoints()));
+                level1.setText(Global.level(users.get(0).getPoints()));
+                level2.setText(Global.level(users.get(1).getPoints()));
+                level3.setText(Global.level(users.get(2).getPoints()));
             }
 
             @Override

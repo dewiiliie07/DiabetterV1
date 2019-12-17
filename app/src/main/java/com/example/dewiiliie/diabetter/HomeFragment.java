@@ -1,7 +1,10 @@
 package com.example.dewiiliie.diabetter;
 
 
+import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.BottomNavigationView;
@@ -13,6 +16,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -53,6 +57,7 @@ public class HomeFragment extends Fragment implements FoodInterface {
 
     View v;
     private TextView tv_nama_user,tv_max_calories, tv_jumlah_calories;
+    private ProgressBar progressBar;
     private RecyclerView recyclerView;
     private ArrayList<Model> addFoodList;
     private ApiInterface mApiInterface;
@@ -85,25 +90,15 @@ public class HomeFragment extends Fragment implements FoodInterface {
         tv_nama_user = (TextView) v.findViewById(R.id.tv_nama_customer);
         tv_max_calories = (TextView) v.findViewById(R.id.tv_max_calories);
         tv_jumlah_calories = (TextView) v.findViewById(R.id.tv_jumlah_calories);
+        progressBar = (ProgressBar) v.findViewById(R.id.progressBar);
         //Set Username
 
-        tv_nama_user.setText(user.getFull_name());
+
+
+//        tv_nama_user.setText(user.getFull_name());
 
         //Set TotalCalory
-        Call<TotalConsumptionUser> totalCalories = mApiInterface.getTotalCaloriesUser(user.getUser_id());
-        totalCalories.enqueue(new Callback<TotalConsumptionUser>() {
-            @Override
-            public void onResponse(Call<TotalConsumptionUser> call, Response<TotalConsumptionUser> response) {
-                TotalConsumptionUser total = response.body();
-                tv_jumlah_calories.setText(String.valueOf(df2.format(total.caloriesTotal())));
-            }
 
-            @Override
-            public void onFailure(Call<TotalConsumptionUser> call, Throwable t) {
-                Toast.makeText(getContext(),"Error : " + t.getMessage().toString(), Toast.LENGTH_SHORT).show();
-                System.out.println("Error : " + t.getMessage().toString());
-            }
-        });
 
 
 
@@ -135,10 +130,12 @@ public class HomeFragment extends Fragment implements FoodInterface {
 
         if (user.getGender() == 'M'){
             KKB = BBI * 30;
+            tv_nama_user.setText("Mr. " + user.getFull_name());
         }
         else if(user.getGender() == 'F')
         {
             KKB = BBI * 25;
+            tv_nama_user.setText("Ms. " +user.getFull_name());
         }
         int umur = Calendar.getInstance().get(Calendar.YEAR) - Integer.valueOf(user.getBirthdate().substring(0,4));
 
@@ -184,9 +181,37 @@ public class HomeFragment extends Fragment implements FoodInterface {
         System.out.println("Kriteria BB : " + kriteriaBB + " Type : " + typeBBI);
         System.out.println("AKtivitas " + aktivitas);
 
-        float totalKebutuhanKalori;
+        final float totalKebutuhanKalori;
         totalKebutuhanKalori = KKB + hitungUmur + kriteriaBB + aktivitas;
+
+        final Call<TotalConsumptionUser> totalCalories = mApiInterface.getTotalCaloriesUser(user.getUser_id());
+        totalCalories.enqueue(new Callback<TotalConsumptionUser>() {
+            @Override
+            public void onResponse(Call<TotalConsumptionUser> call, Response<TotalConsumptionUser> response) {
+                TotalConsumptionUser total = response.body();
+                tv_jumlah_calories.setText(String.valueOf(df2.format(total.caloriesTotal())));
+//
+                if (Build.VERSION.SDK_INT > Build.VERSION_CODES.O) {
+                    progressBar.setMin(0);
+                    progressBar.setMax((int)totalKebutuhanKalori);
+                    progressBar.setProgress((int)total.caloriesTotal());
+                    if ((int)total.caloriesTotal()>(int)totalKebutuhanKalori){
+                        Drawable progressDrawable = progressBar.getProgressDrawable().mutate();
+                        progressDrawable.setColorFilter(Color.RED, android.graphics.PorterDuff.Mode.SRC_IN);
+                        progressBar.setProgressDrawable(progressDrawable);
+                    }
+                }
+//                progressBar.setProgress(50);
+            }
+
+            @Override
+            public void onFailure(Call<TotalConsumptionUser> call, Throwable t) {
+                Toast.makeText(getContext(),"Error : " + t.getMessage().toString(), Toast.LENGTH_SHORT).show();
+                System.out.println("Error : " + t.getMessage().toString());
+            }
+        });
         tv_max_calories.setText(String.valueOf(totalKebutuhanKalori));
+
 
         //Create RecyclerView Foods
 //        Call<ListConsumeType> callConsumeType = mApiInterface.getConsumeType();

@@ -47,7 +47,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="24sp"
-                android:fontFamily="@font/montserrat_bold"
+                android:fontFamily="@font/montserrat_regular"
                 android:textColor="@color/colorBlack"
                 android:text="Ms.Dewi Lie" />
 <!--            <TextView-->
@@ -114,22 +114,15 @@
 
             </LinearLayout>
 
-            <ImageView
-                android:layout_marginTop="30dp"
-                android:layout_alignParentRight="true"
-                android:layout_width="60dp"
-                android:layout_height="50dp"
-                android:src="@drawable/indicator_ok"/>
-
-
-            <!--            <ProgressBar-->
-<!--                android:id="@+id/progressBar"-->
-<!--                style="?android:attr/progressBarStyleHorizontal"-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_below="@+id/ll_jumlah_calories"-->
-<!--                android:layout_alignStart="@+id/tv_nama_customer"-->
-<!--                android:layout_marginBottom="18dp" />-->
+            <ProgressBar
+                android:id="@+id/progressBar"
+                android:layout_marginTop="8dp"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/ll_jumlah_calories"
+                android:layout_alignStart="@+id/tv_nama_customer"
+                android:layout_marginBottom="8dp" />
 
 
         </RelativeLayout>

@@ -31,6 +31,8 @@ import android.widget.Toast;
 import com.example.dewiiliie.diabetter.model.ListQuest;
 import com.example.dewiiliie.diabetter.model.ListQuestCounter;
 import com.example.dewiiliie.diabetter.model.Quest;
+import com.example.dewiiliie.diabetter.rest.ApiClient;
+import com.example.dewiiliie.diabetter.rest.ApiInterface;
 import com.jaeger.library.StatusBarUtil;
 
 import java.text.DateFormat;
@@ -72,6 +74,21 @@ public class MenuUtama extends AppCompatActivity implements BottomNavigationView
         setContentView(R.layout.menu_utama);
 
         checkQuest();
+
+        ApiInterface mApi = ApiClient.getClient().create(ApiInterface.class);
+
+        Call<ListQuest> questCall = mApi.getQuestByUser(Global.user.getUser_id());
+        questCall.enqueue(new Callback<ListQuest>() {
+            @Override
+            public void onResponse(Call<ListQuest> call, Response<ListQuest> response) {
+                Global.quest = response.body().getQuestList();
+            }
+
+            @Override
+            public void onFailure(Call<ListQuest> call, Throwable t) {
+
+            }
+        });
 
 
 //        if(savedInstanceState == null){

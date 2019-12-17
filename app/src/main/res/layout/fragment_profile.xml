@@ -8,7 +8,6 @@
 
     <!-- TODO: Update blank fragment layout -->
 
-
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -31,7 +30,6 @@
                 android:layout_height="200dp"
                 android:layout_marginTop="140dp"
                 app:srcCompat="@drawable/base_menu_header" />
-
             <ImageView
                 android:id="@+id/iv_dp_profile"
                 android:layout_width="match_parent"
@@ -40,7 +38,6 @@
                 android:layout_alignParentTop="true"
                 android:layout_marginTop="164dp"
                 android:src="@drawable/dp_profile" />
-
             <TextView
                 android:id="@+id/tv_nama_customer"
                 android:layout_below="@+id/iv_dp_profile"
@@ -49,7 +46,40 @@
                 android:textSize="52px"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textColor="@color/colorBlack"
+                android:fontFamily="@font/montserrat_regular"
                 android:text="Ms.Dewi Lie"/>
+            <LinearLayout
+                android:id="@+id/ll_level"
+                android:layout_below="@id/tv_nama_customer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center"
+                >
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="14sp"
+                    android:text="Lv. "
+                    />
+                <TextView
+                    android:id="@+id/level_user"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="14sp"
+                    tools:text="0"
+                    />
+            </LinearLayout>
+
+            <ProgressBar
+                android:layout_marginTop="4dp"
+                android:layout_centerHorizontal="true"
+                android:layout_below="@+id/ll_level"
+                android:id="@+id/progressBar"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content" />
 
             <ScrollView
                 android:layout_width="match_parent"
@@ -58,48 +88,42 @@
                 android:layout_below="@+id/iv_base_menu_utama"
                 android:layout_centerHorizontal="true"
                 android:layout_marginBottom="0dp">
-
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="vertical">
-
                     <Button
                         android:id="@+id/btn_acv"
-                        android:layout_width="280dp"
-                        android:layout_height="68dp"
+                        android:layout_width="340dp"
+                        android:layout_height="75dp"
                         android:layout_gravity="center"
                         android:background="@drawable/button_acv" />
-<!--                    <Button-->
-<!--                        android:id="@+id/btn_setting"-->
-<!--                        android:layout_width="280dp"-->
-<!--                        android:layout_height="68dp"-->
-<!--                        android:layout_gravity="center"-->
-<!--                        android:background="@drawable/button_setting"/>-->
                     <Button
-                        android:id="@+id/btn_help"
-                        android:layout_width="280dp"
-                        android:layout_height="68dp"
+                        android:id="@+id/btn_tutorial"
+                        android:layout_width="340dp"
+                        android:layout_height="75dp"
                         android:layout_gravity="center"
                         android:background="@drawable/button_tutorial"/>
                     <Button
+                        android:id="@+id/btn_change_password"
+                        android:layout_width="340dp"
+                        android:layout_height="75dp"
+                        android:layout_gravity="center"
+                        android:background="@drawable/button_change_password"/>
+                    <Button
                         android:id="@+id/btn_logout"
-                        android:layout_width="280dp"
-                        android:layout_height="68dp"
+                        android:layout_width="340dp"
+                        android:layout_height="75dp"
                         android:layout_gravity="center"
                         android:background="@drawable/button_logout"/>
                     <Button
                         android:id="@+id/btn_credit"
-                        android:layout_width="280dp"
-                        android:layout_height="68dp"
+                        android:layout_width="340dp"
+                        android:layout_height="75dp"
                         android:layout_gravity="center"
                         android:background="@drawable/button_credit"/>
-
                 </LinearLayout>
-
             </ScrollView>
         </RelativeLayout>
-
     </FrameLayout>
-
 </RelativeLayout>

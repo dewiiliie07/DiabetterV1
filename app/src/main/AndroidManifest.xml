@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.example.dewiiliie.diabetter">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="com.android.launcher.permission.INSTALL_SHORTCUT" />
 
     <application
@@ -13,10 +13,17 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar">
+        <activity android:name=".Credit_Activity"></activity>
+        <activity android:name=".Logout_Activity" />
+        <activity android:name=".Change_Password_Activity" />
+        <activity android:name=".Tutorial" />
+        <activity android:name=".AchievementActivity" />
 
-        <service android:enabled="true" android:name=".Service.ServiceQuest">
-        </service>
-        <activity android:name=".editFoodActivity"></activity>
+        <service
+            android:name=".Service.ServiceQuest"
+            android:enabled="true" />
+
+        <activity android:name=".editFoodActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

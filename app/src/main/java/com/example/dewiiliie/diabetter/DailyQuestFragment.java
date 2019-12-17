@@ -38,7 +38,7 @@ public class DailyQuestFragment extends Fragment {
             @Override
             public void onResponse(Call<ListQuest> call, Response<ListQuest> response) {
                 quests = response.body().getQuestList();
-
+                Global.quest = quests;
                 ArrayList<Quest> dailyQuest = new ArrayList<>();
                 for (Quest q:quests) {
                     if (q.getQuest_type()==1){
