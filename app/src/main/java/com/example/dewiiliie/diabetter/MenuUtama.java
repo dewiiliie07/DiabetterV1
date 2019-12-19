@@ -2,6 +2,7 @@ package com.example.dewiiliie.diabetter;
 
 
 import android.app.Activity;
+import android.app.Dialog;
 import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.graphics.Color;
@@ -28,6 +29,7 @@ import android.widget.FrameLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.dewiiliie.diabetter.Service.Session;
 import com.example.dewiiliie.diabetter.model.ListQuest;
 import com.example.dewiiliie.diabetter.model.ListQuestCounter;
 import com.example.dewiiliie.diabetter.model.Quest;
@@ -67,11 +69,17 @@ public class MenuUtama extends AppCompatActivity implements BottomNavigationView
 //    private QuestFragment questFragment;
 //    private LeaderboardFragment leaderboardFragment;
 //    private ProfileFragment profileFragment;
+    private Session session;
+    Dialog myDialog;
+    Button close;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.menu_utama);
+
+//        session = new Session(this);
+//        Toast.makeText(this, "LOGIN USERNAME : " + session.getusename(), Toast.LENGTH_SHORT).show();
 
         checkQuest();
 
@@ -179,6 +187,7 @@ public class MenuUtama extends AppCompatActivity implements BottomNavigationView
                 Call<String> lastLogin = Global.mApi.lastLogin(Global.user.getUser_id());
                 try{
                     lastLogin.execute();
+                    Global.user.setLast_login(String.valueOf(dateFormat.format(date)));
                 }catch (Exception ex){
                     ex.printStackTrace();
                 }
@@ -187,38 +196,40 @@ public class MenuUtama extends AppCompatActivity implements BottomNavigationView
             Call<ListQuestCounter> listQuestCounterCall = Global.mApi.checkUserQuest(Global.user.getUser_id());
             try {
 //            ListQuestCounter listQuestCounter = listQuestCounterCall.execute().body();
-                int counter = 0;
+                int[] counter = new int[10];
                 ListQuestCounter lqc = listQuestCounterCall.execute().body();
                 setQuestAndPoint(1);
+                counter[8] = 1;
                 setQuestAndPoint(9);
                 if (lqc.getCounter_add_food(0)>0 && lqc.getConsumetype_id(0)==1){
                     setQuestAndPoint(2);
-                    counter++;
+                    counter[1] = 1;
                 }
                 if (lqc.getCounter_add_food(1)>0 && lqc.getConsumetype_id(1)==2){
                     setQuestAndPoint(3);
-                    counter++;
-
+                    counter[2] = 1;
                 }
                 if (lqc.getCounter_add_food(2)>0 && lqc.getConsumetype_id(2)==3){
                     setQuestAndPoint(4);
-                    counter++;
+                    counter[3] = 1;
                 }
                 if (lqc.getCounter_add_food(3)>0 && lqc.getConsumetype_id(3)==4){
                     setQuestAndPoint(5);
-                    counter++;
+                    counter[4] = 1;
                 }
                 if (lqc.getCounter_add_food(4)>0 && lqc.getConsumetype_id(4)==5){
                     setQuestAndPoint(6);
-                    counter++;
+                    counter[5] = 1;
                 }
-                if (counter>=3){
+                if (counter[1] == 1 && counter[3] == 1 && counter[5] == 1){
                     setQuestAndPoint(7);
+                    counter[6] = 1;
                 }
-                if (counter>=5){
+                if (counter[1] == 1 && counter[2] == 1 && counter[3] == 1 && counter[4] == 1 &&counter[5] == 1){
                     setQuestAndPoint(8);
+                    counter[7] = 1;
                 }
-                if (counter>=8){
+                if (counter[1] == 1 && counter[2] == 1 && counter[3] == 1 && counter[4] == 1 &&counter[5] == 1 && counter[6] == 1 && counter[7] == 1 && counter[8] ==1 ){
                     setQuestAndPoint(11);
                 }
                 if (Global.user.getCounter_login() >= 3){
@@ -280,6 +291,21 @@ public class MenuUtama extends AppCompatActivity implements BottomNavigationView
                                     public void onResponse(Call<String> call, Response<String> response) {
 
                                         if (response.isSuccessful()) {
+                                            //TAMBAHIN DIALOG DISINI
+//                                            myDialog = new Dialog(MenuUtama.this);
+//                                            myDialog.setContentView(R.layout.custom_dialog);
+//                                            myDialog.setTitle("My Custom Dialog");
+//
+//                                            close = (Button)myDialog.findViewById(R.id.btn_close);
+//                                            close.setEnabled(true);
+//
+//                                            close.setOnClickListener(new View.OnClickListener() {
+//                                                @Override
+//                                                public void onClick(View view) {
+//                                                    myDialog.cancel();
+//                                                }
+//                                            });
+//                                            MyDialog.show();
                                             Toast.makeText(getBaseContext(), "Added Point", Toast.LENGTH_SHORT).show();
 
                                         } else {

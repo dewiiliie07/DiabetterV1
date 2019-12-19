@@ -2,6 +2,7 @@ package com.example.dewiiliie.diabetter;
 
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -15,8 +16,11 @@ import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.google.gson.Gson;
+
 import java.util.ArrayList;
 
+import static android.content.Context.MODE_PRIVATE;
 import static com.example.dewiiliie.diabetter.Global.user;
 
 
@@ -101,8 +105,15 @@ public class ProfileFragment extends Fragment implements View.OnClickListener{
                 startActivity(i3);
                 break;
             case R.id.btn_logout :
-                Intent i4 = new Intent(getContext(),Logout_Activity.class);
-                startActivity(i4);
+                SharedPreferences.Editor editor = getContext().getSharedPreferences("Login", MODE_PRIVATE).edit();
+                Gson gson = new Gson();
+                String json = "";
+                editor.putString("user",json);
+                editor.apply();
+                startActivity(new Intent(getContext(),MainActivity.class));
+                getActivity().finish();
+//                Intent i4 = new Intent(getContext(),Logout_Activity.class);
+//                startActivity(i4);
                 break;
             case R.id.btn_credit :
                 Intent i5 = new Intent(getContext(),Credit_Activity.class);

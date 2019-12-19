@@ -2,6 +2,7 @@ package com.example.dewiiliie.diabetter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.v4.view.PagerAdapter;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -76,7 +77,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> implements
         editFood = holder.tv_editFood;
         totalCals = holder.tv_total_cals;
 
-        ArrayList<Consumption> c = new ArrayList<>();
+        final ArrayList<Consumption> c = new ArrayList<>();
 
 //        image.setImageResource(foodItem.getImage());
 
@@ -90,10 +91,20 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> implements
             }
         });
 
+
+
+        for(int i = 0 ; i < consumptions.get(0).size() ; i ++){
+            if ( consumptions.get(0).get(i).getConsumetypeID() ==  Integer.parseInt(mList.get(position).getConsumetype_id())){
+                c.add(consumptions.get(0).get(i));
+            }
+        }
         editFood.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent i = new Intent(mContext,editFoodActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("user_consumption",c);
+                i.putExtras(bundle);
                 mContext.startActivity(i);
 
                 //Intent intent = new Intent(mContext,editFoodActivity.class);
@@ -101,12 +112,6 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> implements
 //                Toast.makeText(mContext, "This feature is unused", Toast.LENGTH_SHORT).show();
             }
         });
-
-        for(int i = 0 ; i < consumptions.get(0).size() ; i ++){
-            if ( consumptions.get(0).get(i).getConsumetypeID() ==  Integer.parseInt(mList.get(position).getConsumetype_id())){
-                c.add(consumptions.get(0).get(i));
-            }
-        }
 
         ArrayList<ChildModel> list = new ArrayList<>(); // ChildModel as ChoosenFood
 //        ArrayList<Consumption> consumptions = new ArrayList<>();

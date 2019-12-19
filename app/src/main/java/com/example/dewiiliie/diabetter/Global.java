@@ -1,5 +1,6 @@
 package com.example.dewiiliie.diabetter;
 
+import com.example.dewiiliie.diabetter.Service.Session;
 import com.example.dewiiliie.diabetter.model.ListQuest;
 import com.example.dewiiliie.diabetter.model.Quest;
 import com.example.dewiiliie.diabetter.model.User;
@@ -13,6 +14,7 @@ public class Global {
     public static double totalCalories;
     public static ApiInterface mApi = ApiClient.getClient().create(ApiInterface.class);
     public static ArrayList<Quest> quest;
+
 
     public static String getMaxLevel(int points){
         if (points>350){

@@ -143,6 +143,11 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.MyViewHolder> 
         });
     }
 
+    public void filterList(ArrayList<Food> filteredList){
+        foods = filteredList;
+        notifyDataSetChanged();
+    }
+
     @Override
     public int getItemCount() {
         return foods.size();

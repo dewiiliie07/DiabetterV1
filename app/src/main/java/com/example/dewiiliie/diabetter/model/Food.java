@@ -9,8 +9,8 @@ public class Food {
     private String name;
     @SerializedName("calories")
     private float calories;
-    @SerializedName("serving_calories")
-    private int serving_calories; // satuannya gram
+    @SerializedName("serving_calory")
+    private int serving_calory; // satuannya gram
 
 
     public Food(){}
@@ -19,7 +19,7 @@ public class Food {
         this.id = id;
         this.name = name;
         this.calories = calories;
-        this.serving_calories = serving_calories;
+        this.serving_calory = serving_calories;
     }
 
     public int getId() {
@@ -35,6 +35,6 @@ public class Food {
     }
 
     public int getServing_calories() {
-        return serving_calories;
+        return serving_calory;
     }
 }

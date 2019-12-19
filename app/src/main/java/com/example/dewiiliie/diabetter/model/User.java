@@ -11,6 +11,8 @@ public class User implements Serializable {
     private String full_name;
     @SerializedName("email")
     private String email;
+    @SerializedName("password")
+    private String password;
     @SerializedName("birthdate")
     private String birthdate;
     @SerializedName("height")
@@ -34,6 +36,14 @@ public class User implements Serializable {
 
     public void setCounter_daily_quest(int counter_daily_quest) {
         this.counter_daily_quest = counter_daily_quest;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public int getCounter_login() {

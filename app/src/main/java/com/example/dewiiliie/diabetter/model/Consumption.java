@@ -2,7 +2,9 @@ package com.example.dewiiliie.diabetter.model;
 
 import com.google.gson.annotations.SerializedName;
 
-public class Consumption {
+import java.io.Serializable;
+
+public class Consumption implements Serializable {
     @SerializedName("full_name")
     private String fullname;
     @SerializedName("serving_calories")
@@ -10,13 +12,25 @@ public class Consumption {
     @SerializedName("serving_calory")
     private int serving_calory;
     @SerializedName("calories")
-    private double calories;
+    private float calories;
     @SerializedName("food_name")
     private String foodname;
     @SerializedName("consumetype_id")
     private int consumetypeID;
     @SerializedName("consumetype_name")
     private String consumetypeName;
+    @SerializedName("user_consumption_id")
+    private int user_consumption_id;
+    @SerializedName("food_id")
+    private int food_id;
+
+    public int getFood_id() {
+        return food_id;
+    }
+
+    public void setFood_id(int food_id) {
+        this.food_id = food_id;
+    }
 
     public Consumption(String fullname, int serving_calories, int serving_calory, float calories, String foodname, int consumetypeID, String consumetypeName) {
         this.fullname = fullname;
@@ -52,7 +66,15 @@ public class Consumption {
         return consumetypeName;
     }
 
-    public double getCalories() {
+    public float getCalories() {
         return calories;
+    }
+
+    public int getUser_consumption_id() {
+        return user_consumption_id;
+    }
+
+    public void setUser_consumption_id(int user_consumption_id) {
+        this.user_consumption_id = user_consumption_id;
     }
 }

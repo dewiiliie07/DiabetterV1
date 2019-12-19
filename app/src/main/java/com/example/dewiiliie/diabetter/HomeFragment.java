@@ -1,6 +1,7 @@
 package com.example.dewiiliie.diabetter;
 
 
+import android.app.Dialog;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
@@ -15,6 +16,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -68,7 +70,6 @@ public class HomeFragment extends Fragment implements FoodInterface {
     private int countConsumption;
     private static DecimalFormat df2 = new DecimalFormat("#.##");
     private FoodInterface foodInterface;
-
     public HomeFragment() {
         // Required empty public constructor
     }

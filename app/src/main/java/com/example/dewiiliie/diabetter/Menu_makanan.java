@@ -6,10 +6,13 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.dewiiliie.diabetter.Interface.FoodInterface;
@@ -35,8 +38,10 @@ public class Menu_makanan extends AppCompatActivity implements FoodInterface {
     private Button btn_confirm;
     private RecyclerView recyclerView;
     private ApiInterface mApiInterface;
+    private EditText et_search;
     private int[] foodconsumeds;
     private int consumetype_id;
+    private FoodAdapter adapter;
     private ArrayList<Food> foods = new ArrayList<>();
 //    private ArrayList<FoodConsumed> foodConsumeds = new ArrayList<>();
 
@@ -45,11 +50,32 @@ public class Menu_makanan extends AppCompatActivity implements FoodInterface {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu_makanan);
 
+        et_search = (EditText) findViewById(R.id.et_search);
+
         Toolbar toolbar = findViewById(R.id.toolbar_food_list);
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("Choose Your Food");
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        et_search.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                filter(editable.toString());
+            }
+        });
+
+
 
         if (savedInstanceState == null) {
             Bundle extras = getIntent().getExtras();
@@ -146,7 +172,7 @@ public class Menu_makanan extends AppCompatActivity implements FoodInterface {
 
     private void initRecycleView(){
         RecyclerView recyclerView = findViewById(R.id.my_recycler_view);
-        FoodAdapter adapter = new FoodAdapter(this,foods,this);
+        adapter = new FoodAdapter(this,foods,this);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
@@ -170,6 +196,17 @@ public class Menu_makanan extends AppCompatActivity implements FoodInterface {
     @Override
     public void totalCalories(double totalCalory) {
 
+    }
+
+    public void filter(String text){
+        ArrayList<Food> filterList = new ArrayList<>();
+
+        for (Food f: foods){
+            if (f.getName().toLowerCase().contains(text.toLowerCase())){
+                filterList.add(f);
+            }
+        }
+        adapter.filterList(filterList);
     }
 
 }

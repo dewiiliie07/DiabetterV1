@@ -116,4 +116,21 @@ public interface ApiInterface {
 
     @GET("User_android/user_leaderboard")
     Call<LoginUser> getUsers();
+
+    @GET("user_consumption_android/consumption_delete")
+    Call<String> delete_consumption(
+            @Query("user_id") int user_id,
+            @Query("user_consumption_id") int user_consumption_id
+    );
+
+    @GET("User_android/first_quest")
+    Call<String> first_quest(
+            @Query("user_id") int user_id
+    );
+
+    @GET("user_android/change_password")
+    Call<String> change_password(
+            @Query("user_id") int user_id,
+            @Query("password") String password
+    );
 }
