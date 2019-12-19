@@ -12,21 +12,35 @@
         android:layout_height="wrap_content"
         android:id="@+id/toolbar_food_list"></android.support.v7.widget.Toolbar>
 
-    <RelativeLayout
+    <LinearLayout
         android:id="@+id/rl_search"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="65dp"
         android:layout_below="@id/toolbar_food_list"
+        android:orientation="horizontal"
+        android:weightSum="7"
         android:background="@drawable/base_search">
-<!--        <SearchView-->
-<!--            android:id="@+id/sv_food"-->
-<!--            android:paddingLeft="20dp"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:gravity="fill"-->
-<!--            ></SearchView>-->
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="40dp"
+            android:layout_marginLeft="16dp"
+            android:layout_gravity="center"
+            android:src="@drawable/ic_loupe"
+            android:padding="8dp"
+            />
+        <EditText
+            android:id="@+id/et_search"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center"
+            android:hint="Search..."
+            android:layout_weight="6"
+            android:layout_marginRight="16dp"
+            android:background="@null"
+            />
 
-    </RelativeLayout>
+    </LinearLayout>
 
     <Button
         android:layout_alignParentBottom="true"

@@ -19,8 +19,8 @@
                         <option name="values">
                           <map>
                             <entry key="assetSourceType" value="FILE" />
-                            <entry key="outputName" value="ic_left_arrow" />
-                            <entry key="sourceFile" value="D:\dwnld\left_arrow.svg" />
+                            <entry key="outputName" value="ic_loupe" />
+                            <entry key="sourceFile" value="D:\dwnld\loupe.svg" />
                           </map>
                         </option>
                       </PersistentState>
